@@ -1,6 +1,13 @@
 package com.assignment2.dtos;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class LoginDTO {
-    String username;
-    String password;
+    @Getter
+    @Setter
+    private String username;
+    @Getter
+    @Setter
+    private String password;
 }

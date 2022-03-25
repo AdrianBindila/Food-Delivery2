@@ -1,11 +1,11 @@
 package com.assignment2.service;
 
-import com.assignment2.repository.RestaurantRepository;
+import com.assignment2.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RestaurantService {
+public class CustomerService {
     @Autowired
-    RestaurantRepository restaurantRepository;
+    CustomerRepository customerRepository;
 }
