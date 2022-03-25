@@ -1,45 +1,38 @@
 package com.assignment2.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-@NoArgsConstructor
+
 @Entity
 @Table(name = "orders")
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Order {
 
     @Id
     @GeneratedValue
     private Long orderId;
 
-    @Getter
-    @Setter
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @Getter
-    @Setter
     @Column(nullable = false)
     private String deliveryAddress;
 
-    @Getter
-    @Setter
     @Column(nullable = false)
     private LocalDate date;
 
-    @Getter
-    @Setter
     @Column(nullable = false)
     private int totalPrice;
 
-    @Getter
-    @Setter
     @Column(nullable = false)
     @ManyToMany
     @JoinTable(
@@ -47,17 +40,27 @@ public class Order {
             joinColumns = @JoinColumn(name = "food_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id")
     )
+    @ToString.Exclude
     private List<Food> items;
 
-    @Getter
-    @Setter
     @ManyToOne
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
-    @Getter
-    @Setter
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Order order = (Order) o;
+        return orderId != null && Objects.equals(orderId, order.orderId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

@@ -10,7 +10,7 @@ public class AdminService {
     @Autowired
     AdminRepository adminRepository;
 
-    public Admin getAdmin(String username, String password){
+    public Admin findAdmin(String username, String password){
         return adminRepository.findByUsernameAndPassword(username, password).orElse(new Admin());
     }
 }

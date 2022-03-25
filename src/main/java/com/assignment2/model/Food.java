@@ -1,43 +1,55 @@
 package com.assignment2.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
-@NoArgsConstructor
+
 @Entity
 @Table(name = "foods")
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Food {
 
     @Id
     @GeneratedValue
     private Long foodId;
-    @Getter
-    @Setter
+
     @Column(nullable = false)
     private String name;
-    @Getter
-    @Setter
+
     private String description;
-    @Getter
-    @Setter
+
     @Column(nullable = false)
     private int price;
-    @Getter
-    @Setter
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private FoodCategory category;
-    @Getter
-    @Setter
+
     @ManyToOne
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
-    @Getter
-    @Setter
+
     @ManyToMany(mappedBy = "items")
+    @ToString.Exclude
     private List<Order> orders;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Food food = (Food) o;
+        return foodId != null && Objects.equals(foodId, food.foodId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

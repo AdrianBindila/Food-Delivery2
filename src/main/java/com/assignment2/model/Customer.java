@@ -1,53 +1,43 @@
 package com.assignment2.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
-@NoArgsConstructor
+
 @Entity
 @Table(name = "customers")
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Customer {
 
     @Id
     @GeneratedValue
     private Long customerId;
 
-    @Getter
-    @Setter
     @Column(nullable = false)
     private String firstName;
 
-    @Getter
-    @Setter
     @Column(nullable = false)
     private String lastName;
 
-    @Getter
-    @Setter
     @Column(nullable = false)
     private String email;
 
-    @Getter
-    @Setter
     @Column(nullable = false)
     private String address;
 
-    @Getter
-    @Setter
     @Column(nullable = false)
     private String phoneNumber;
 
-    @Getter
-    @Setter
     @Column(nullable = false)
     private String username;
 
-    @Getter
-    @Setter
     @Column(nullable = false)
     private String password;
 
@@ -55,5 +45,19 @@ public class Customer {
     private Order currentOrder;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Order> orderHistory;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Customer customer = (Customer) o;
+        return customerId != null && Objects.equals(customerId, customer.customerId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

@@ -20,7 +20,7 @@ public class RestaurantController {
     public ResponseEntity<List<RestaurantDTO>> restaurants(){
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "RestaurantController");
-        List<RestaurantDTO> restaurants=restaurantService.getRestaurantDTO;
+        List<RestaurantDTO> restaurants = null;
         return ResponseEntity.accepted().headers(headers).body(restaurants);
     }
 

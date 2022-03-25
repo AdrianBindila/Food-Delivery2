@@ -12,5 +12,6 @@ public class RegisterMapper {
         customer.setPhoneNumber(registerDTO.getPhoneNumber());
         customer.setUsername(registerDTO.getUsername());
         customer.setPassword(registerDTO.getPassword());
+        return customer;
     }
 }

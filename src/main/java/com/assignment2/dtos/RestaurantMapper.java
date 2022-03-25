@@ -13,9 +13,9 @@ public class RestaurantMapper {
 
     public RestaurantDTO convertToDTO(Restaurant restaurant) {
         RestaurantDTO restaurantDTO = new RestaurantDTO();
-        restaurantDTO.setAddress(re);
-        restaurantDTO.setName();
-        restaurantDTO.setDeliveryZones();
+//        restaurantDTO.setAddress();
+//        restaurantDTO.setName();
+//        restaurantDTO.setDeliveryZones();
         return restaurantDTO;
     }
 }
