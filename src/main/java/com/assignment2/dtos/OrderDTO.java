@@ -2,23 +2,20 @@ package com.assignment2.dtos;
 
 import com.assignment2.model.Food;
 import com.assignment2.model.OrderStatus;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Data
 public class OrderDTO {
-    @Getter
-    @Setter
+    @NonNull
     private OrderStatus status;
-    @Getter
-    @Setter
+    @NonNull
     private LocalDate date;
-    @Getter
-    @Setter
+    @NonNull
     private int totalPrice;
-    @Getter
-    @Setter
+    @NonNull
     private List<Food> items;
 }

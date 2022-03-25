@@ -1,20 +1,16 @@
 package com.assignment2.dtos;
 
 import com.assignment2.model.FoodCategory;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import org.springframework.lang.NonNull;
 
-public class FoodDTO {//Menu of a selected restaurant
-    @Getter
-    @Setter
+@Data
+public class FoodDTO {
+    @NonNull
     private String name;
-    @Getter
-    @Setter
     private String description;
-    @Getter
-    @Setter
+    @NonNull
     private int price;
-    @Getter
-    @Setter
+    @NonNull
     private FoodCategory category;
 }

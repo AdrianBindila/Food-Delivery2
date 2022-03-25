@@ -1,14 +1,14 @@
 package com.assignment2.dtos;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.lang.NonNull;
 
 @Data
-public class LoginDTO {
+public class CustomerDTO {
     @NonNull
-    private String username;
+    private String firstName;
     @NonNull
-    private String password;
+    private String lastName;
+    @NonNull
+    private String email;
 }

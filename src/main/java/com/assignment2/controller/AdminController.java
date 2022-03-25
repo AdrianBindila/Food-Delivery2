@@ -9,8 +9,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -19,17 +17,16 @@ public class AdminController {
 
     @GetMapping
     public ResponseEntity<Admin> getAdmin(@Param("username") String username, @Param("password") String password) {
-        System.out.println("Hie");
-        HttpHeaders headers=new HttpHeaders();
-        headers.add("Responded","AdminController");
-        Admin admin=adminService.findAdmin(username, password);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Responded", "AdminController");
+        Admin admin = adminService.findAdmin(username, password);
         return ResponseEntity.accepted().headers(headers).body(admin);
     }
 
     @PutMapping("/addRestaurant")//add restaurant to existing admin
-    public void addRestaurant(@Param("adminId") Long adminId, @RequestBody Restaurant restaurant){
-        HttpHeaders headers=new HttpHeaders();
-        headers.add("Responded","AdminController");
+    public void addRestaurant(@Param("adminId") Long adminId, @RequestBody Restaurant restaurant) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Responded", "AdminController");
         adminService.addRestaurant(adminId, restaurant);
     }
 

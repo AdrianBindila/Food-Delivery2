@@ -1,22 +1,28 @@
 package com.assignment2.controller;
 
+import com.assignment2.dtos.CustomerDTO;
 import com.assignment2.dtos.RegisterDTO;
+import com.assignment2.model.Customer;
 import com.assignment2.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
-
-    @PostMapping("/AddCustomer")
+    @GetMapping
+    public ResponseEntity<Customer> getCustomer(@Param("id") Long customerId){
+        Customer customer=customerService.getCustomer(customerId);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Responded", "CustomerController");
+        return ResponseEntity.accepted().headers(headers).body(customer);
+    }
+    @PostMapping
     public ResponseEntity<RegisterDTO> addCustomer(@RequestBody RegisterDTO customer) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "CustomerController");

@@ -1,21 +1,24 @@
 package com.assignment2.dtos;
 
-import lombok.Getter;
+import lombok.Data;
+import org.springframework.lang.NonNull;
 
+@Data
 public class RegisterDTO {
-    @Getter
+    @NonNull
     private String firstName;
-    @Getter
+    @NonNull
     private String lastName;
-    @Getter
+    @NonNull
     private String email;
-    @Getter
+    @NonNull
     private String address;
-    @Getter
+    @NonNull
     private String phoneNumber;
-    @Getter
+    @NonNull
     private String username;
-    @Getter
+    @NonNull
     private String password;
+    @NonNull
     private String confirmPassword;
 }

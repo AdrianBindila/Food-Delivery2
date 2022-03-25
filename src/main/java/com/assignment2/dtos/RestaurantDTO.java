@@ -1,16 +1,14 @@
 package com.assignment2.dtos;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import org.springframework.lang.NonNull;
 
+@Data
 public class RestaurantDTO {//details shown in the restaurant list
-    @Getter
-    @Setter
+    @NonNull
     private String name;
-    @Getter
-    @Setter
+    @NonNull
     private String address;
-    @Getter
-    @Setter
+    @NonNull
     private String deliveryZones;
 }
