@@ -1,26 +1,36 @@
 package com.assignment2.controller;
 
 import com.assignment2.model.Admin;
+import com.assignment2.model.Restaurant;
 import com.assignment2.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/admin")
 public class AdminController {
     @Autowired
     AdminService adminService;
 
-    @GetMapping("/GetAdmin/{username}/{password}")
-    public ResponseEntity<Admin> getAdmin(@PathVariable String username, @PathVariable String password) {
+    @GetMapping
+    public ResponseEntity<Admin> getAdmin(@Param("username") String username, @Param("password") String password) {
+        System.out.println("Hie");
         HttpHeaders headers=new HttpHeaders();
         headers.add("Responded","AdminController");
         Admin admin=adminService.findAdmin(username, password);
         return ResponseEntity.accepted().headers(headers).body(admin);
     }
 
+    @PutMapping("/addRestaurant")//add restaurant to existing admin
+    public void addRestaurant(@Param("adminId") Long adminId, @RequestBody Restaurant restaurant){
+        HttpHeaders headers=new HttpHeaders();
+        headers.add("Responded","AdminController");
+        adminService.addRestaurant(adminId, restaurant);
+    }
 
 }
