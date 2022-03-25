@@ -1,5 +1,6 @@
 package com.assignment2.model;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,11 +9,12 @@ import java.util.Set;
 
 @NoArgsConstructor
 @Entity
+@Table(name = "customers")
 public class Customer {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long customerId;
 
     @Column(nullable = false)
     private String firstName;
@@ -38,7 +40,6 @@ public class Customer {
     @Transient
     private Order currentOrder;
 
-    @OneToMany
-    private List<Order> orderHistory = new java.util.ArrayList<>();
-
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Order> orderHistory;
 }

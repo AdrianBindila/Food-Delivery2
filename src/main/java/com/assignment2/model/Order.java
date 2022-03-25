@@ -3,16 +3,17 @@ package com.assignment2.model;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
+@Table(name = "orders")
 public class Order {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long orderId;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
@@ -21,20 +22,25 @@ public class Order {
     private String deliveryAddress;
 
     @Column(nullable = false)
-    private LocalDate date;
+    private String date;
 
     @Column(nullable = false)
     private int totalPrice;
 
-    @JoinColumn(nullable = false)
-    @OneToOne
-    private Customer customer;
+    @Column(nullable = false)
+    @ManyToMany
+    @JoinTable(
+            name = "order_food",
+            joinColumns = @JoinColumn(name = "food_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+    )
+    private List<Food> items;
 
-    @JoinColumn
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
-    @Column(nullable = false)
-    @OneToMany
-    private Set<Food> items;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 }

@@ -7,11 +7,12 @@ import java.util.List;
 
 @NoArgsConstructor
 @Entity
+@Table(name = "restaurants")
 public class Restaurant {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long restaurantId;
 
     @Column(nullable = false)
     private String name;
@@ -22,9 +23,12 @@ public class Restaurant {
     @Column(nullable = false)
     private String deliveryZones;
 
-    @OneToMany
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<Food> menu;
 
-    @OneToMany
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<Order> orders;
+
+    @OneToOne(mappedBy = "restaurant")
+    private Admin admin;
 }

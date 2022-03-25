@@ -6,11 +6,12 @@ import javax.persistence.*;
 
 @NoArgsConstructor
 @Entity
+@Table(name = "admins")
 public class Admin {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long adminId;
 
     @Column(nullable = false)
     private String username;
@@ -18,7 +19,7 @@ public class Admin {
     @Column(nullable = false)
     private String password;
 
-    @JoinColumn
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 }
