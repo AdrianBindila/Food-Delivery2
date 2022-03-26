@@ -6,7 +6,6 @@ import App from "./components/App";
 import Customer from "./components/Customer";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Restaurants from "./components/Restaurants";
 
 ReactDOM.render(
     <BrowserRouter>

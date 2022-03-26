@@ -3,6 +3,15 @@ package com.assignment2.dtos;
 import com.assignment2.model.Restaurant;
 
 public class RestaurantMapper {
+    private static RestaurantMapper instance = new RestaurantMapper();
+
+    private RestaurantMapper() {
+    }
+
+    public static RestaurantMapper getInstance() {
+        return instance;
+    }
+
     public Restaurant convertFromDTO(RestaurantDTO restaurantDTO) {
         Restaurant restaurant = new Restaurant();
         restaurant.setAddress(restaurantDTO.getAddress());

@@ -3,12 +3,14 @@ package com.assignment2.dtos;
 import com.assignment2.model.Food;
 import com.assignment2.model.OrderStatus;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class OrderDTO {
     @NonNull
     private OrderStatus status;

@@ -2,10 +2,18 @@ package com.assignment2.dtos;
 
 import com.assignment2.model.Food;
 import com.assignment2.model.Restaurant;
+import lombok.Singular;
 
 import java.util.ArrayList;
 
-public class FoodMapper {
+public class FoodMapper {//singleton
+    private static FoodMapper instance=new FoodMapper();
+    private FoodMapper(){}
+
+    public static FoodMapper getInstance() {
+        return instance;
+    }
+
     public Food convertFromDTO(FoodDTO foodDTO) {
         Food food = new Food();
         food.setCategory(foodDTO.getCategory());

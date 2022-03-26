@@ -3,6 +3,14 @@ package com.assignment2.dtos;
 import com.assignment2.model.Customer;
 
 public class RegisterMapper {
+    private static RegisterMapper instance = new RegisterMapper();
+
+    private RegisterMapper() {
+    }
+
+    public static RegisterMapper getInstance() {
+        return instance;
+    }
     public Customer convertFromDTO(RegisterDTO registerDTO){
         Customer customer=new Customer();
         customer.setFirstName(registerDTO.getFirstName());

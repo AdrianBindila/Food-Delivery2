@@ -6,6 +6,14 @@ import com.assignment2.model.Order;
 import com.assignment2.model.Restaurant;
 
 public class OrderMapper {
+    private static OrderMapper instance = new OrderMapper();
+
+    private OrderMapper() {
+    }
+
+    public static OrderMapper getInstance() {
+        return instance;
+    }
     public OrderDTO convertToDTO(Order order){
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setDate(order.getDate());

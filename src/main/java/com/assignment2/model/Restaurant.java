@@ -1,5 +1,6 @@
 package com.assignment2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -37,7 +38,8 @@ public class Restaurant {
     @ToString.Exclude
     private List<Order> orders;
 
-    @OneToOne(mappedBy = "restaurant")
+    @OneToOne(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Admin admin;
 
     @Override
