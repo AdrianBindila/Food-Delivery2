@@ -1,4 +1,4 @@
-function AdminOrders() {
+function Orders() {
     return (
         <div>
             <h1>Admin Orders</h1>
@@ -6,4 +6,4 @@ function AdminOrders() {
     );
 }
 
-export default AdminOrders;
+export default Orders;

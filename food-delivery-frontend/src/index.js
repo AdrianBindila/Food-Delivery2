@@ -7,9 +7,9 @@ import Customer from "./components/Customer";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Restaurants from "./components/Restaurants";
-import NewRestaurant from "./components/NewRestaurant";
-import AdminOrders from "./components/AdminOrders";
-import RestaurantManager from "./components/RestaurantManager";
+import NewRestaurant from "./components/AdminComponents/NewRestaurant";
+import Orders from "./components/AdminComponents/Orders";
+import Manager from "./components/AdminComponents/Manager";
 
 ReactDOM.render(
     <BrowserRouter>
@@ -17,7 +17,7 @@ ReactDOM.render(
             <Route path="/" element={<App/>}>
                 <Route path="login" element={<Login/>}/>
                 <Route path="register" element={<Register/>}/>
-                <Route path="customer" element={<Customer/>}/>
+                <Route path="customer/*" element={<Customer/>}/>
                 <Route path="restaurants" element={<Restaurants/>}/>
                 <Route path="admin/*" element={<Admin/>}/>
             </Route>

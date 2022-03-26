@@ -1,4 +1,4 @@
-function RestaurantManager() {
+function Manager() {
     return (
         <div>
             <h1>Manage Restaurant</h1>
@@ -6,4 +6,4 @@ function RestaurantManager() {
     );
 }
 
-export default RestaurantManager;
+export default Manager;
