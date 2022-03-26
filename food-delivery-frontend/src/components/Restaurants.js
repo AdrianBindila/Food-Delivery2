@@ -1,7 +1,9 @@
+import {Route} from "react-router-dom";
+
 function Restaurants() {
   return (
     <div>
-      <h1>1</h1>
+      <h1>Restaurants</h1>
     </div>
   );
 }

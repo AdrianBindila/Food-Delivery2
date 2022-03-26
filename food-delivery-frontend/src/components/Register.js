@@ -2,7 +2,6 @@ import {Button, Card, Form} from "react-bootstrap";
 
 function Register() {
     return (
-        <Card style={{width:'122rem'}}>
             <Form>
                 <Form.Group className="mb-3">
                     <Form.Label>First Name</Form.Label>
@@ -46,7 +45,6 @@ function Register() {
                     Register
                 </Button>
             </Form>
-        </Card>
     );
 }
 
