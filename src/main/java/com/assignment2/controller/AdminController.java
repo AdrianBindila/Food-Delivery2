@@ -24,10 +24,10 @@ public class AdminController {
     }
 
     @PutMapping("/addRestaurant")//add restaurant to existing admin
-    public void addRestaurant(@Param("adminId") Long adminId, @RequestBody Restaurant restaurant) {
+    public void addRestaurant(@Param("username") String adminUsername, @RequestBody Restaurant restaurant) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "AdminController");
-        adminService.addRestaurant(adminId, restaurant);
+        adminService.addRestaurant(adminUsername, restaurant);
     }
 
 }

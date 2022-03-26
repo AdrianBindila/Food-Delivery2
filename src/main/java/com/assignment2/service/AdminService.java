@@ -11,13 +11,17 @@ public class AdminService {
     @Autowired
     AdminRepository adminRepository;
 
-    public Admin findAdmin(String username, String password) {
-        return adminRepository.findByUsernameAndPassword(username, password).orElse(new Admin());
+    public Admin findAdmin(String username, String password){
+        return adminRepository.findByUsernameAndPassword(username, password).orElse(new Admin());//TODO set an error for when not found
     }
 
-    public void addRestaurant(Long adminId, Restaurant restaurant) {
-        Admin admin = adminRepository.getById(adminId);
-        admin.setRestaurant(restaurant);
-        adminRepository.save(admin);
+    public void addRestaurant(String adminUsername, Restaurant restaurant) {
+        adminRepository.findByUsername(adminUsername).ifPresentOrElse(
+                admin -> {
+                    admin.setRestaurant(restaurant);
+                    adminRepository.save(admin);
+                },
+                () -> System.out.println("Admin not found!")
+        );
     }
 }

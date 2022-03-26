@@ -20,7 +20,7 @@ public class Restaurant {
     @GeneratedValue
     private Long restaurantId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
