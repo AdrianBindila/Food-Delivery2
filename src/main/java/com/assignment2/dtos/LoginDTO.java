@@ -1,13 +1,11 @@
 package com.assignment2.dtos;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.lang.NonNull;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class LoginDTO {
     @NonNull
     private String username;

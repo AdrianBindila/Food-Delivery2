@@ -1,5 +1,9 @@
 package com.assignment2.service;
 
+import com.assignment2.dtos.CustomerDTO;
+import com.assignment2.dtos.LoginDTO;
+import com.assignment2.dtos.RegisterDTO;
+import com.assignment2.dtos.RegisterMapper;
 import com.assignment2.model.Customer;
 import com.assignment2.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,5 +15,12 @@ public class CustomerService {
     CustomerRepository customerRepository;
     public Customer getCustomer(Long customerId){
         return customerRepository.findById(customerId).orElse(new Customer());
+    }
+    public Customer getCustomer(LoginDTO loginDTO){
+        return customerRepository.findByUsernameAndPassword(loginDTO.getUsername(), loginDTO.getPassword()).orElse(new Customer());
+    }
+    public void insertCustomer(RegisterDTO registerDTO){
+        Customer customer=RegisterMapper.getInstance().convertFromDTO(registerDTO);
+        customerRepository.save(customer);
     }
 }
