@@ -17,7 +17,7 @@ public class RegisterMapper {
         customer.setLastName(registerDTO.getLastName());
         customer.setAddress(registerDTO.getAddress());
         customer.setEmail(registerDTO.getEmail());
-        customer.setPhoneNumber(registerDTO.getPhoneNumber());
+        customer.setPhoneNumber(registerDTO.getPhone());
         customer.setUsername(registerDTO.getUsername());
         customer.setPassword(registerDTO.getPassword());
         return customer;

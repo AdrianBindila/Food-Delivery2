@@ -1,52 +1,147 @@
-import {Button, Card, Form} from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
-function Register() {
-    return (
-            <Form>
-                <Form.Group className="mb-3">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control type="firstname" placeholder="First Name"/>
-                </Form.Group>
+function Register(props) {
+  const [register, setRegister] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    phone: "",
+    username: "",
+    password: "",
+    confirmedPassword: "",
+  });
+  const navigate = useNavigate();
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control type="lastname" placeholder="Last Name"/>
-                </Form.Group>
+  function cancel() {
+    navigate("/login");
+  }
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Address</Form.Label>
-                    <Form.Control type="address" placeholder="Address"/>
-                </Form.Group>
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setRegister((prevRegister) => {
+      return {
+        ...prevRegister,
+        [name]: value,
+      };
+    });
+  }
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Phone</Form.Label>
-                    <Form.Control type="phone" placeholder="Phone"/>
-                </Form.Group>
+  function handleSubmit(event) {
+    props.onRegister(register);
+    setRegister({
+      firstName: "",
+      lastName: "",
+      email: "",
+      address: "",
+      phone: "",
+      username: "",
+      password: "",
+      confirmedPassword: "",
+    });
+    event.preventDefault();
+  }
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type="username" placeholder="Username"/>
-                </Form.Group>
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3">
+        <Form.Label>First Name</Form.Label>
+        <Form.Control
+          type="firstname"
+          placeholder="First Name"
+          name="firstName"
+          value={register.firstName}
+          onChange={handleChange}
+        />
+      </Form.Group>
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password"/>
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control type="confpass" placeholder="Confirm Password"/>
-                </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Last Name</Form.Label>
+        <Form.Control
+          type="lastname"
+          placeholder="Last Name"
+          name="lastName"
+          value={register.lastName}
+          onChange={handleChange}
+        />
+      </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Log in
-                </Button>
+      <Form.Group className="mb-3">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={register.email}
+          onChange={handleChange}
+        />
+      </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Register
-                </Button>
-            </Form>
-    );
+      <Form.Group className="mb-3">
+        <Form.Label>Address</Form.Label>
+        <Form.Control
+          type="address"
+          placeholder="Address"
+          name="address"
+          value={register.address}
+          onChange={handleChange}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Phone</Form.Label>
+        <Form.Control
+          type="phone"
+          placeholder="Phone"
+          name="phone"
+          value={register.phone}
+          onChange={handleChange}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Username</Form.Label>
+        <Form.Control
+          type="username"
+          placeholder="Username"
+          name="username"
+          value={register.username}
+          onChange={handleChange}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          name="password"
+          value={register.password}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Confirm Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Confirm Password"
+          name="confirmedPassword"
+          value={register.confirmedPassword}
+          onChange={handleChange}
+        />
+      </Form.Group>
+
+      <Button variant="primary" type="submit">
+        Register
+      </Button>
+
+      <Button variant="primary" onClick={cancel}>
+        Cancel
+      </Button>
+    </Form>
+  );
 }
 
 export default Register;
-

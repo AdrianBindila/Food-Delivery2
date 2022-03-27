@@ -1,21 +1,55 @@
 import {Button, Form} from "react-bootstrap";
+import {useState} from "react";
+import {useNavigate} from "react-router";
 
-function Login() {
+
+function Login(props) {
+    const [login, setLogin] = useState({
+        username: "",
+        password: "",
+    });
+
+    const navigate = useNavigate();
+    function register() {//redirect to register
+        navigate("/register");
+    }
+
+    function handleChange(event) {
+        const {name, value} = event.target;
+        setLogin((prevLogin) => {
+            return {
+                ...prevLogin,
+                [name]: value,
+            };
+        });
+    }
+
+    function handleSubmit(event) {
+        props.onLogin(login);
+        setLogin({
+            username: "",
+            password: "",
+        });
+        event.preventDefault();
+    }
+
     return (
-        <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="username" placeholder="Username"/>
+                <Form.Control type="username" placeholder="Username" name="username" value={login.username}
+                              onChange={handleChange}/>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password"/>
+                <Form.Control type="password" placeholder="Password" name="password" value={login.password}
+                              onChange={handleChange}/>
             </Form.Group>
             <Button variant="primary" type="submit">
                 Log in
             </Button>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" onClick={register}>
                 Register
             </Button>
         </Form>

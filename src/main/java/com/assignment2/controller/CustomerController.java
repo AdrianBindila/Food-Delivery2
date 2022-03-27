@@ -22,11 +22,10 @@ public class CustomerController {
         headers.add("Responded", "CustomerController");
         return ResponseEntity.accepted().headers(headers).body(customer);
     }
-    @PostMapping
-    public ResponseEntity<RegisterDTO> addCustomer(@RequestBody RegisterDTO customer) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Responded", "CustomerController");
 
-        return ResponseEntity.accepted().headers(headers).body(customer);
+    @PostMapping
+    public void addCustomer(@RequestBody RegisterDTO customer) {
+        System.out.println(customer);
+
     }
 }
