@@ -24,12 +24,14 @@ function Login(props) {
   }
 
   function handleSubmit(event) {
-    let isAdmin = props.onLogin(login);
-    setLogin({
-      username: "",
-      password: "",
+    props.onLogin(login).then((isAdmin) => {
+      console.log(isAdmin);
+      setLogin({
+        username: "",
+        password: "",
+      });
+      isAdmin ? navigate("/admin") : navigate("/customer");
     });
-    isAdmin ? navigate("/admin") : navigate("/customer");
     event.preventDefault();
   }
 

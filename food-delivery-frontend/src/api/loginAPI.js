@@ -10,6 +10,7 @@ class Admin {
 }
 var user = undefined;
 var isAdmin = undefined;
+
 async function sendLogin(login) {
   await axios
     .get("http://localhost:8080/api/login", {
@@ -21,14 +22,13 @@ async function sendLogin(login) {
         //very hacky, but I couldn't think of a better way
         console.log("Hello Admin");
         isAdmin = true;
-        return isAdmin;
       } else {
         console.log("Hello Customer");
         isAdmin = false;
-        return isAdmin;
       }
     })
     .catch((err) => console.log(err));
+  return isAdmin;
 }
 
 export { sendLogin, user };
