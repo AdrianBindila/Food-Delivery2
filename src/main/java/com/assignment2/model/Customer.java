@@ -14,12 +14,9 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Customer {
+@PrimaryKeyJoinColumn(name = "customer_id")
 
-    @Id
-    @GeneratedValue
-    private Long customerId;
-
+public class Customer extends User{
     @Column(nullable = false)
     private String firstName;
 
@@ -35,29 +32,10 @@ public class Customer {
     @Column(nullable = false)
     private String phoneNumber;
 
-    @Column(nullable = false, unique = true)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
-
     @Transient
     private Order currentOrder;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Order> orderHistory;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Customer customer = (Customer) o;
-        return customerId != null && Objects.equals(customerId, customer.customerId);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

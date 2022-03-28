@@ -41,6 +41,7 @@ function Register(props) {
       password: "",
       confirmedPassword: "",
     });
+    navigate("/login");
     event.preventDefault();
   }
 
