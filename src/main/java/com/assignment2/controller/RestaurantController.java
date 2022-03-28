@@ -23,10 +23,9 @@ public class RestaurantController {
         List<Restaurant> restaurants = restaurantService.getRestaurants();
         return ResponseEntity.accepted().headers(headers).body(restaurants);
     }
+
     @PostMapping
     public void insertRestaurant(@RequestBody RestaurantDTO restaurantDTO){
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Responded", "RestaurantController");
         restaurantService.insertRestaurant(restaurantDTO);
     }
 }

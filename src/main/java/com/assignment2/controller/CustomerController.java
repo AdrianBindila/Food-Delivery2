@@ -26,7 +26,8 @@ public class CustomerController {
 
     @PostMapping
     public void insertCustomer(@RequestBody RegisterDTO customer) {
-        System.out.println(customer);
         customerService.insertCustomer(customer);
     }
+    //@PutMapping - overwrites the existing entity completely, need to send the whole entity
+    //@PatchMapping - only changes fields as needed, only send the fields that changed
 }

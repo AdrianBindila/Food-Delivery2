@@ -23,11 +23,11 @@ public class AdminController {
         return ResponseEntity.accepted().headers(headers).body(admin);
     }
 
-    @PutMapping("/addRestaurant")//add restaurant to existing admin
-    public void addRestaurant(@Param("username") String adminUsername, @RequestBody Restaurant restaurant) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Responded", "AdminController");
-        adminService.addRestaurant(adminUsername, restaurant);
+    @PostMapping("/addRestaurant")//add restaurant to existing admin
+    public void addRestaurant(@Param("username") String username, @RequestBody Restaurant restaurant) {
+        System.out.println(username);
+        System.out.println(restaurant);
+        adminService.addRestaurant(username, restaurant);
     }
 
 }
