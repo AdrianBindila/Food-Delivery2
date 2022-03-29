@@ -6,7 +6,7 @@ import com.assignment2.model.Order;
 import com.assignment2.model.Restaurant;
 
 public class OrderMapper {
-    private static OrderMapper instance = new OrderMapper();
+    private static final OrderMapper instance = new OrderMapper();
 
     private OrderMapper() {
     }

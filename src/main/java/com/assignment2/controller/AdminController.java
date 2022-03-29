@@ -1,5 +1,6 @@
 package com.assignment2.controller;
 
+import com.assignment2.dtos.RestaurantDTO;
 import com.assignment2.model.Admin;
 import com.assignment2.model.Restaurant;
 import com.assignment2.service.AdminService;
@@ -24,10 +25,12 @@ public class AdminController {
     }
 
     @PostMapping("/addRestaurant")//add restaurant to existing admin
-    public void addRestaurant(@Param("username") String username, @RequestBody Restaurant restaurant) {
-        System.out.println(username);
-        System.out.println(restaurant);
-        adminService.addRestaurant(username, restaurant);
+    public ResponseEntity<RestaurantDTO> addRestaurant(@Param("username") String username, @RequestBody RestaurantDTO restaurantDTO) {
+        adminService.addRestaurant(username, restaurantDTO);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Responded", "AdminController");
+        return ResponseEntity.accepted().headers(headers).body(restaurantDTO);
     }
+
 
 }

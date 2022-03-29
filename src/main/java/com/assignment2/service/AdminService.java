@@ -1,5 +1,7 @@
 package com.assignment2.service;
 
+import com.assignment2.dtos.RestaurantDTO;
+import com.assignment2.dtos.RestaurantMapper;
 import com.assignment2.model.Admin;
 import com.assignment2.model.Restaurant;
 import com.assignment2.repository.AdminRepository;
@@ -15,7 +17,9 @@ public class AdminService {
         return adminRepository.findByUsernameAndPassword(username, password).orElse(new Admin());//TODO set an error for when not found
     }
 
-    public void addRestaurant(String adminUsername, Restaurant restaurant) {
+    public void addRestaurant(String adminUsername, RestaurantDTO restaurantDTO) {
+        Restaurant restaurant=RestaurantMapper.getInstance().convertFromDTO(restaurantDTO);
+
         adminRepository.findByUsername(adminUsername).ifPresentOrElse(
                 admin -> {
                     admin.setRestaurant(restaurant);

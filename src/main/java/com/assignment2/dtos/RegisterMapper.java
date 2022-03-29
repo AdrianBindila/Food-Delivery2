@@ -3,7 +3,7 @@ package com.assignment2.dtos;
 import com.assignment2.model.Customer;
 
 public class RegisterMapper {
-    private static RegisterMapper instance = new RegisterMapper();
+    private static final RegisterMapper instance = new RegisterMapper();
 
     private RegisterMapper() {
     }

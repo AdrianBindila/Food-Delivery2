@@ -2,16 +2,25 @@ import axios from "axios";
 
 const adminUsername = "qwer";
 
-function sendRestaurant(restaurant) {
-  console.log(restaurant);
-  axios
+async function sendRestaurant(restaurant) {
+  await axios
     .post("http://localhost:8080/api/admin/addRestaurant", restaurant, {
       params: {
         username: adminUsername,
       },
     })
-    .then((res) => console.log(res))
+    .then((res) => {
+      return res;
+    })
     .then((err) => console.log(err));
+}
+
+async function getMenu(restaurant) {
+  await axios.get("");
+}
+
+async function getOrders(restaurant) {
+  await axios.get("");
 }
 
 export { sendRestaurant };

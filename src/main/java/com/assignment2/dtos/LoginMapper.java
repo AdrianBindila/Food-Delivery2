@@ -3,7 +3,7 @@ package com.assignment2.dtos;
 import com.assignment2.model.Customer;
 
 public class LoginMapper {
-    private static LoginMapper instance = new LoginMapper();
+    private static final LoginMapper instance = new LoginMapper();
 
     private LoginMapper() {
     }
@@ -16,7 +16,6 @@ public class LoginMapper {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setUsername(customer.getUsername());
         loginDTO.setPassword(customer.getPassword());
-
         return loginDTO;
     }
 }

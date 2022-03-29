@@ -7,7 +7,7 @@ import lombok.Singular;
 import java.util.ArrayList;
 
 public class FoodMapper {//singleton
-    private static FoodMapper instance=new FoodMapper();
+    private static final FoodMapper instance=new FoodMapper();
     private FoodMapper(){}
 
     public static FoodMapper getInstance() {
