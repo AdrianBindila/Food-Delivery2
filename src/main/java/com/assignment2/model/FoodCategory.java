@@ -1,10 +1,10 @@
 package com.assignment2.model;
 
 public enum FoodCategory {
-    BREAKFAST("Breakfast"),
-    LUNCH("Lunch"),
-    DESSERT("Dessert"),
-    BEVERAGE("Beverage");
+    BREAKFAST("breakfast"),
+    LUNCH("lunch"),
+    DESSERT("dessert"),
+    BEVERAGE("beverage");
 
     private final String label;
     FoodCategory(String label){

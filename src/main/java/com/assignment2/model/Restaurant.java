@@ -40,6 +40,7 @@ public class Restaurant {
 
     @OneToOne(mappedBy = "restaurant", fetch = FetchType.LAZY)
     @JsonIgnore
+    @ToString.Exclude
     private Admin admin;
 
     @Override

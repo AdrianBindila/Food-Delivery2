@@ -5,7 +5,7 @@ import MenuTable from "./MenuTable";
 import { useState } from "react";
 import FoodModal from "./FoodModal";
 
-function Manager() {
+function Manager(props) {
   var menu = {
     breakfast: "",
     lunch: "",
@@ -15,8 +15,7 @@ function Manager() {
 
   return (
     <div>
-      <FoodModal />
-      <Modal></Modal>
+      <FoodModal onAdd={props.onAdd} />
       <Tabs defaultActiveKey="breakfast" className="mb-3">
         <Tab eventKey="breakfast" title="Breakfast">
           <MenuTable data={menu.breakfast} />

@@ -2,13 +2,15 @@ import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AddFood from "./AddFood";
 
-function FoodModal() {
+function FoodModal(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   function sendFood(food) {
-    console.log(food);
+    //console.log(food);
+    props.onAdd(food);
+
     //send food to request - use a prop
   }
   return (

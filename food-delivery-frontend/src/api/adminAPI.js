@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const adminUsername = "qwer";
-
+var adminUsername = "qwer";
 async function sendRestaurant(restaurant) {
   await axios
     .post("http://localhost:8080/api/admin/addRestaurant", restaurant, {
@@ -23,4 +22,16 @@ async function getOrders(restaurant) {
   await axios.get("");
 }
 
-export { sendRestaurant };
+var restaurantName = "Organizer";
+
+async function sendFood(food) {
+  await axios
+    .post("http://localhost:8080/api/restaurant/food", food, {
+      params: {
+        restaurantName: restaurantName,
+      },
+    })
+    .then((res) => console.log(res))
+    .then((err) => console.log(err));
+}
+export { sendRestaurant, sendFood };

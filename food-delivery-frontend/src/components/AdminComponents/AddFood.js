@@ -60,10 +60,10 @@ function AddFood(props) {
           onChange={handleChange}
         >
           <option>Category</option>
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dessert">Dessert</option>
-          <option value="beverage">Beverage</option>
+          <option value="BREAKFAST">Breakfast</option>
+          <option value="LUNCH">Lunch</option>
+          <option value="DESSERT">Dessert</option>
+          <option value="BEVERAGE">Beverage</option>
         </Form.Select>
       </Form.Group>
       <Button variant="secondary">Close</Button>

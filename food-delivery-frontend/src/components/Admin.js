@@ -1,22 +1,28 @@
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import RestaurantForm from "./AdminComponents/RestaurantForm";
 import Orders from "./AdminComponents/Orders";
 import Manager from "./AdminComponents/Manager";
 import React from "react";
-import Dashboard from "./AdminComponents/Menu";
-import {sendRestaurant} from "../api/adminAPI";
+import Dashboard from "./AdminComponents/Dashboard";
+import { sendFood, sendRestaurant } from "../api/adminAPI";
 
 function Admin() {
-    return (
-        <div>
-            <Routes>
-                <Route index element={<Dashboard/>}/>
-                <Route path="add-restaurant" element={<RestaurantForm onAdd={sendRestaurant}/>}/>
-                <Route path="view-orders" element={<Orders/>}/>
-                <Route path="manage-restaurant" element={<Manager/>}/>
-            </Routes>
-        </div>
-    );
+  return (
+    <div>
+      <Routes>
+        <Route index element={<Dashboard />} />
+        <Route
+          path="add-restaurant"
+          element={<RestaurantForm onAdd={sendRestaurant} />}
+        />
+        <Route path="view-orders" element={<Orders />} />
+        <Route
+          path="manage-restaurant"
+          element={<Manager onAdd={sendFood} />}
+        />
+      </Routes>
+    </div>
+  );
 }
 
 export default Admin;
