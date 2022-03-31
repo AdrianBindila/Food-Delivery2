@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
+import {getMenu} from "../../api/adminAPI";
 
-function MenuTable() {
+function Menu() {
   const [items, setItems] = useState();
   return (
     <Table>
@@ -22,4 +23,4 @@ function MenuTable() {
     </Table>
   );
 }
-export default MenuTable;
+export default Menu;

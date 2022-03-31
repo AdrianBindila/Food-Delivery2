@@ -2,7 +2,6 @@ package com.assignment2.controller;
 
 import com.assignment2.dtos.RestaurantDTO;
 import com.assignment2.model.Admin;
-import com.assignment2.model.Restaurant;
 import com.assignment2.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;

@@ -1,12 +1,10 @@
-import { Button, Modal } from "react-bootstrap";
 import { Tab } from "bootstrap";
-import { Table, Tabs } from "react-bootstrap";
-import MenuTable from "./MenuTable";
-import { useState } from "react";
+import { Tabs } from "react-bootstrap";
+import Menu from "./Menu";
 import FoodModal from "./FoodModal";
 
 function Manager(props) {
-  var menu = {
+  const menu = {
     breakfast: "",
     lunch: "",
     dinner: "",
@@ -18,16 +16,16 @@ function Manager(props) {
       <FoodModal onAdd={props.onAdd} />
       <Tabs defaultActiveKey="breakfast" className="mb-3">
         <Tab eventKey="breakfast" title="Breakfast">
-          <MenuTable data={menu.breakfast} />
+          <Menu data={menu.breakfast} />
         </Tab>
         <Tab eventKey="lunch" title="Lunch">
-          <MenuTable data={menu.lunch} />
+          <Menu data={menu.lunch} />
         </Tab>
         <Tab eventKey="dinner" title="Dinner">
-          <MenuTable data={menu.dinner} />
+          <Menu data={menu.dinner} />
         </Tab>
         <Tab eventKey="beverage" title="Beverage">
-          <MenuTable data={menu.beverage} />
+          <Menu data={menu.beverage} />
         </Tab>
       </Tabs>
     </div>

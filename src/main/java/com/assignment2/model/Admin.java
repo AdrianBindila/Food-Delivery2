@@ -1,10 +1,8 @@
 package com.assignment2.model;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "admins")

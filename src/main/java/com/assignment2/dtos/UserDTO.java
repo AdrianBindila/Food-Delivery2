@@ -6,7 +6,7 @@ import org.springframework.lang.NonNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginDTO {
+public class UserDTO {
     @NonNull
     private String username;
     @NonNull

@@ -8,8 +8,9 @@ class Admin {
     this.restaurant = restaurant;
   }
 }
-var user = undefined;
-var isAdmin = undefined;
+
+let user = undefined;
+let isAdmin = undefined;
 
 async function sendLogin(login) {
   await axios
@@ -18,14 +19,8 @@ async function sendLogin(login) {
     })
     .then((res) => {
       user = res.data;
-      if (user.firstName === undefined) {
-        //very hacky, but I couldn't think of a better way
-        console.log("Hello Admin");
-        isAdmin = true;
-      } else {
-        console.log("Hello Customer");
-        isAdmin = false;
-      }
+      console.log(user);
+      isAdmin = user.firstName === undefined;
     })
     .catch((err) => console.log(err));
   return isAdmin;

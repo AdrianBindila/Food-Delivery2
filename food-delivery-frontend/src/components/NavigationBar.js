@@ -2,7 +2,7 @@ import { Button } from "bootstrap";
 import { Container, Nav, Navbar, NavDropdown, NavLink } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 
-function Navigationbar() {
+function NavigationBar() {
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -27,4 +27,4 @@ function Navigationbar() {
   );
 }
 
-export default Navigationbar;
+export default NavigationBar;

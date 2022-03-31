@@ -4,11 +4,11 @@ import lombok.Data;
 import org.springframework.lang.NonNull;
 
 @Data
-public class CustomerDTO {
-    @NonNull
+public class CustomerDTO extends UserDTO{
+
     private String firstName;
-    @NonNull
+
     private String lastName;
-    @NonNull
+
     private String email;
 }

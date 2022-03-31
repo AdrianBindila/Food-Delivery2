@@ -1,11 +1,9 @@
 package com.assignment2.model;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 
 @Entity
@@ -31,9 +29,6 @@ public class Customer extends User{
 
     @Column(nullable = false)
     private String phoneNumber;
-
-    @Transient
-    private Order currentOrder;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     @ToString.Exclude

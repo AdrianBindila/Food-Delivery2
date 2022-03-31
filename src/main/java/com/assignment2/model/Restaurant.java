@@ -32,10 +32,12 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     @ToString.Exclude
+    @JsonIgnore
     private List<Food> menu;
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     @ToString.Exclude
+    @JsonIgnore
     private List<Order> orders;
 
     @OneToOne(mappedBy = "restaurant", fetch = FetchType.LAZY)

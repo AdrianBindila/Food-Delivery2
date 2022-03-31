@@ -2,7 +2,6 @@ package com.assignment2.dtos;
 
 import com.assignment2.model.Food;
 import com.assignment2.model.Restaurant;
-import lombok.Singular;
 
 import java.util.ArrayList;
 

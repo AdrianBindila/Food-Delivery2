@@ -1,22 +1,28 @@
 package com.assignment2.controller;
 
-import com.assignment2.dtos.LoginDTO;
+import com.assignment2.dtos.UserDTO;
+import com.assignment2.dtos.OrderDTO;
 import com.assignment2.dtos.RegisterDTO;
 import com.assignment2.model.Customer;
 import com.assignment2.service.CustomerService;
+import com.assignment2.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
-
+    @Autowired
+    OrderService orderService;
     @GetMapping
-    public ResponseEntity<Customer> getCustomer(LoginDTO loginDTO) {
+    public ResponseEntity<Customer> getCustomer(UserDTO loginDTO) {//TODO:change to DTO
         Customer customer = customerService.getCustomer(loginDTO);
         System.out.println(customer);
         HttpHeaders headers = new HttpHeaders();
@@ -28,6 +34,12 @@ public class CustomerController {
     public void insertCustomer(@RequestBody RegisterDTO customer) {
         customerService.insertCustomer(customer);
     }
-    //@PutMapping - overwrites the existing entity completely, need to send the whole entity
-    //@PatchMapping - only changes fields as needed, only send the fields that changed
+
+    @GetMapping("/order")
+    public ResponseEntity<List<OrderDTO>> getOrders(@Param("username") String username){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Responded", "CustomerController");
+        List<OrderDTO> orderDTOS=orderService.getCustomerOrders(username);
+        return ResponseEntity.accepted().headers(headers).body(orderDTOS);
+    }
 }
