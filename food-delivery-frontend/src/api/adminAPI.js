@@ -1,43 +1,49 @@
 import axios from "axios";
-
-const adminUsername = "qwer";
-const restaurantName = "Organizer";
+import { user } from "./loginAPI";
 
 async function sendRestaurant(restaurant) {
   await axios
     .post("http://localhost:8080/api/admin/addRestaurant", restaurant, {
       params: {
-        username: adminUsername,
+        username: user.username,
       },
     })
     .then((res) => {
+      user.restaurant = res;
       return res;
     })
     .then((err) => console.log(err));
-}
-
-async function getOrders(restaurant) {
-  await axios.get("");
 }
 
 async function sendFood(food) {
   await axios
     .post("http://localhost:8080/api/restaurant/food", food, {
       params: {
-        restaurantName: restaurantName,
+        restaurantName: user.restaurant.name,
       },
     })
     .then((res) => console.log(res))
     .then((err) => console.log(err));
 }
 
+let menu = undefined;
+
 async function getMenu() {
   await axios
     .get("http://localhost:8080/api/restaurant/food", {
-      params: restaurantName,
+      params: {
+        restaurantName: user.restaurant.name,
+      },
     })
-    .then((res) => console.log(res))
+    .then((res) => {
+      menu = res.data;
+    })
     .catch((err) => console.log(err));
+  return menu;
 }
 
-export { sendRestaurant, sendFood, getMenu };
+async function getOrders(restaurant) {
+  await axios.get("");
+}
+
+export { sendRestaurant, sendFood, getMenu, getOrders, menu };

@@ -25,7 +25,6 @@ function Login(props) {
 
   function handleSubmit(event) {
     props.onLogin(login).then((isAdmin) => {
-      console.log(isAdmin);
       setLogin({
         username: "",
         password: "",

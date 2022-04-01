@@ -8,9 +8,7 @@ function FoodModal(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   function sendFood(food) {
-    //console.log(food);
     props.onAdd(food);
-
     //send food to request - use a prop
   }
   return (

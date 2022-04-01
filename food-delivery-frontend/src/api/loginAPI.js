@@ -1,11 +1,17 @@
 import axios from "axios";
-
+//TODO: use state to change global variables
 class Admin {
-  constructor(id, username, password, restaurant) {
-    this.id = id;
+  constructor(username, password, restaurant) {
     this.username = username;
     this.password = password;
     this.restaurant = restaurant;
+  }
+}
+class Restaurant{
+  constructor(name,address,deliveryZones) {
+    this.name=name;
+    this.address=address;
+    this.deliveryZones=deliveryZones;
   }
 }
 
@@ -19,7 +25,6 @@ async function sendLogin(login) {
     })
     .then((res) => {
       user = res.data;
-      console.log(user);
       isAdmin = user.firstName === undefined;
     })
     .catch((err) => console.log(err));

@@ -37,6 +37,7 @@ public class RestaurantController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "RestaurantController");
         List<FoodDTO> menuDTO=foodService.getMenu(restaurantName);
+        System.out.println(menuDTO);
         return ResponseEntity.accepted().headers(headers).body(menuDTO);
     }
 

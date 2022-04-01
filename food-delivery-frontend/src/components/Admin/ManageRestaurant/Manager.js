@@ -4,28 +4,21 @@ import Menu from "./Menu";
 import FoodModal from "./FoodModal";
 
 function Manager(props) {
-  const menu = {
-    breakfast: "",
-    lunch: "",
-    dinner: "",
-    beverage: "",
-  };
-
   return (
     <div>
       <FoodModal onAdd={props.onAdd} />
       <Tabs defaultActiveKey="breakfast" className="mb-3">
         <Tab eventKey="breakfast" title="Breakfast">
-          <Menu data={menu.breakfast} />
+          <Menu category="breakfast" />
         </Tab>
         <Tab eventKey="lunch" title="Lunch">
-          <Menu data={menu.lunch} />
+          <Menu category="lunch" />
         </Tab>
         <Tab eventKey="dinner" title="Dinner">
-          <Menu data={menu.dinner} />
+          <Menu category="dinner" />
         </Tab>
         <Tab eventKey="beverage" title="Beverage">
-          <Menu data={menu.beverage} />
+          <Menu category="beverage" />
         </Tab>
       </Tabs>
     </div>

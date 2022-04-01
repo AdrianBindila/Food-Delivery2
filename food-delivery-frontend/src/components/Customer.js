@@ -1,8 +1,8 @@
 import {Route, Routes} from "react-router-dom";
-import RestaurantList from "./CustomerComponents/RestaurantList";
-import Cart from "./CustomerComponents/Cart";
-import CurrentOrder from "./CustomerComponents/CurrentOrder";
-import OrderHistory from "./CustomerComponents/OrderHistory";
+import RestaurantList from "./Customer/RestaurantList";
+import Cart from "./Customer/Cart";
+import CurrentOrder from "./Customer/CurrentOrder";
+import OrderHistory from "./Customer/OrderHistory";
 
 function Customer() {
     return (

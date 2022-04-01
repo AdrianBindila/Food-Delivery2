@@ -1,16 +1,18 @@
 import { Route, Routes } from "react-router-dom";
-import RestaurantForm from "./AdminComponents/RestaurantForm";
-import Orders from "./AdminComponents/Orders";
-import Manager from "./AdminComponents/Manager";
+import RestaurantForm from "./Admin/AddRestaurant/RestaurantForm";
+import Orders from "./Admin/ViewOrders/Orders";
+import Manager from "./Admin/ManageRestaurant/Manager";
 import React from "react";
-import Dashboard from "./AdminComponents/Dashboard";
-import { sendFood, sendRestaurant } from "../api/adminAPI";
+import Dashboard from "./Admin/Dashboard";
+import {getMenu, getOrders, menu, sendFood, sendRestaurant} from "../api/adminAPI";
+import {user} from "../api/loginAPI";
 
 function Admin() {
+
   return (
     <div>
       <Routes>
-        <Route index element={<Dashboard />} />
+        <Route index element={<Dashboard getMenu={getMenu} loadOrders={getOrders}/>} />
         <Route
           path="add-restaurant"
           element={<RestaurantForm onAdd={sendRestaurant} />}
@@ -18,7 +20,7 @@ function Admin() {
         <Route path="view-orders" element={<Orders />} />
         <Route
           path="manage-restaurant"
-          element={<Manager onAdd={sendFood} />}
+          element={<Manager restaurant={user.restaurant} menu={menu} onAdd={sendFood} />}
         />
       </Routes>
     </div>

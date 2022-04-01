@@ -25,9 +25,10 @@ public class AdminController {
 
     @PostMapping("/addRestaurant")//add restaurant to existing admin
     public ResponseEntity<RestaurantDTO> addRestaurant(@Param("username") String username, @RequestBody RestaurantDTO restaurantDTO) {
-        adminService.addRestaurant(username, restaurantDTO);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "AdminController");
+
+        adminService.addRestaurant(username, restaurantDTO);
         return ResponseEntity.accepted().headers(headers).body(restaurantDTO);
     }
 
