@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Table } from "react-bootstrap";
-import { menu } from "../../../api/adminAPI";
 
 function Menu(props) {
   return (
@@ -13,19 +12,20 @@ function Menu(props) {
         </tr>
       </thead>
       <tbody>
-        {menu
-          .filter((item) => {
-            return item.category.toLowerCase() === props.category;
-          })
-          .map((item) => {
-            return (
-              <tr key={item.index}>
-                <td>{item.name}</td>
-                <td>{item.description}</td>
-                <td>{item.price}</td>
-              </tr>
-            );
-          })}
+        {props.menu &&
+          props.menu
+            .filter((item) => {
+              return item.category.toLowerCase() === props.category;
+            })
+            .map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{item.name}</td>
+                  <td>{item.description}</td>
+                  <td>{item.price}</td>
+                </tr>
+              );
+            })}
       </tbody>
     </Table>
   );

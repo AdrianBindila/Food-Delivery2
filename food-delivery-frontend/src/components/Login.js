@@ -1,6 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { getRestaurantList } from "../api/customerAPI";
 
 function Login(props) {
   const [login, setLogin] = useState({
@@ -29,7 +30,9 @@ function Login(props) {
         username: "",
         password: "",
       });
-      isAdmin ? navigate("/admin") : navigate("/customer");
+      isAdmin
+        ? navigate("/admin")
+        : getRestaurantList().then(() => navigate("/customer"));
     });
     event.preventDefault();
   }

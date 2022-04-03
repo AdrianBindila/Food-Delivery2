@@ -2,6 +2,8 @@ package com.assignment2.dtos;
 
 import com.assignment2.model.Restaurant;
 
+import java.util.ArrayList;
+
 public class RestaurantMapper {
     private static final RestaurantMapper instance = new RestaurantMapper();
 
@@ -17,6 +19,8 @@ public class RestaurantMapper {
         restaurant.setAddress(restaurantDTO.getAddress());
         restaurant.setDeliveryZones(restaurantDTO.getDeliveryZones());
         restaurant.setName(restaurantDTO.getName());
+        restaurant.setMenu(new ArrayList<>());
+        restaurant.setOrders(new ArrayList<>());
         return restaurant;
     }
 

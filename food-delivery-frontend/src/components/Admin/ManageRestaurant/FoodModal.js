@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { sendFood } from "../../../api/adminAPI";
 import AddFood from "./AddFood";
 
 function FoodModal(props) {
@@ -7,9 +8,10 @@ function FoodModal(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  function sendFood(food) {
+
+  function handleAdd(food) {
+    sendFood(food);
     props.onAdd(food);
-    //send food to request - use a prop
   }
   return (
     <>
@@ -23,7 +25,7 @@ function FoodModal(props) {
         </Modal.Header>
 
         <Modal.Body>
-          <AddFood show={show} setShow={setShow} sendFood={sendFood} />
+          <AddFood show={show} setShow={setShow} sendFood={handleAdd} />
         </Modal.Body>
       </Modal>
     </>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { getMenu } from "../../../api/adminAPI";
 
 function AddFood(props) {
   const [food, setFood] = useState({
@@ -21,6 +22,7 @@ function AddFood(props) {
   function handleSubmit(event) {
     props.setShow(false);
     props.sendFood(food);
+    getMenu();
     event.preventDefault();
   }
   return (
