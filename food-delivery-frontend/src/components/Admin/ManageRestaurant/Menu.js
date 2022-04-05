@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 
 function Menu(props) {
   return (
@@ -9,6 +9,7 @@ function Menu(props) {
           <th>Name</th>
           <th>Description</th>
           <th>Price</th>
+          {props.isOrder && <th></th>}
         </tr>
       </thead>
       <tbody>
@@ -23,6 +24,19 @@ function Menu(props) {
                   <td>{item.name}</td>
                   <td>{item.description}</td>
                   <td>{item.price}</td>
+                  {props.isOrder && (
+                    <td>
+                      <Button
+                        onClick={() => {
+                          props.setCart((prev) => {
+                            return [...prev, item];
+                          });
+                        }}
+                      >
+                        +
+                      </Button>
+                    </td>
+                  )}
                 </tr>
               );
             })}

@@ -1,6 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { sendRegistration } from "../api/registerAPI";
 
 function Register(props) {
   const [register, setRegister] = useState({
@@ -30,7 +31,7 @@ function Register(props) {
   }
 
   function handleSubmit(event) {
-    props.onRegister(register);
+    sendRegistration(register);
     setRegister({
       firstName: "",
       lastName: "",

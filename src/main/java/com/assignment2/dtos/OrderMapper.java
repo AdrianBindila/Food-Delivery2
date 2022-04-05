@@ -22,14 +22,14 @@ public class OrderMapper {
         orderDTO.setTotalPrice(order.getTotalPrice());
         return orderDTO;
     }
-    public Order convertFromDTO(OrderDTO orderDTO){
+    public Order convertFromDTO(OrderDTO orderDTO, Customer customer, Restaurant restaurant){
         Order order=new Order();
         order.setDate(orderDTO.getDate());
         order.setItems(orderDTO.getItems());
         order.setStatus(orderDTO.getStatus());
         order.setTotalPrice(orderDTO.getTotalPrice());
-        order.setCustomer(new Customer());//get it from the current customer
-        order.setRestaurant(new Restaurant());//get it from the selected restaurant
+        order.setCustomer(customer);//get it from the current customer
+        order.setRestaurant(restaurant);//get it from the selected restaurant
         return order;
     }
 }

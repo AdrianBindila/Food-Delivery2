@@ -7,11 +7,11 @@ class Admin {
     this.restaurant = restaurant;
   }
 }
-class Restaurant{
-  constructor(name,address,deliveryZones) {
-    this.name=name;
-    this.address=address;
-    this.deliveryZones=deliveryZones;
+class Restaurant {
+  constructor(name, address, deliveryZones) {
+    this.name = name;
+    this.address = address;
+    this.deliveryZones = deliveryZones;
   }
 }
 
@@ -26,6 +26,7 @@ async function sendLogin(login) {
     .then((res) => {
       user = res.data;
       isAdmin = user.firstName === undefined;
+      // sessionStorage.setItem("isAdmin", JSON.stringify(isAdmin));
     })
     .catch((err) => console.log(err));
   return isAdmin;

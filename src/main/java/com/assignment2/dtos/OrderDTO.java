@@ -19,5 +19,5 @@ public class OrderDTO {
     @NonNull
     private int totalPrice;
     @NonNull
-    private List<Food> items;
+    private List<FoodDTO> items;
 }

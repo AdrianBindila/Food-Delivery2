@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
+import { menu } from "../../api/customerAPI";
 
 function MenuTable() {
-  const [items, setItems] = useState();
+  const items = menu;
   return (
     <Table>
       <thead>
@@ -14,16 +15,20 @@ function MenuTable() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>
-            <Button>
-              <span class="material-icons">add</span>
-            </Button>
-          </td>
-        </tr>
+        {items.map((item, index) => {
+          return (
+            <tr key={index}>
+              <td>{item.name}</td>
+              <td>{item.description}</td>
+              <td>{item.price}</td>
+              <td>
+                <Button onClick={() => console.log(item.name)}>
+                  <span class="material-icons">add</span>
+                </Button>
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </Table>
   );

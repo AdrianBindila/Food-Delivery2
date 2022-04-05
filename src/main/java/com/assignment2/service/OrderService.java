@@ -33,4 +33,10 @@ public class OrderService {
         List<Order> orders = orderRepository.findByCustomer(customer);
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
     }
+    public void addOrder(OrderDTO orderDTO, String customerUsername, String restaurantName){
+        Customer customer=customerRepository.findByUsername(customerUsername).orElse(new Customer());
+        Restaurant restaurant=restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
+        Order order=OrderMapper.getInstance().convertFromDTO(orderDTO,customer,restaurant);
+        orderRepository.save(order);
+    }
 }

@@ -9,9 +9,22 @@ async function getRestaurantList() {
     .catch((err) => console.log(err));
   return restaurantList;
 }
-
+let menu = undefined;
+async function getMenu(restaurantName) {
+  await axios
+    .get("http://localhost:8080/api/restaurant/food", {
+      params: {
+        restaurantName: restaurantName,
+      },
+    })
+    .then((res) => {
+      menu = res.data;
+    })
+    .catch((err) => console.log(err));
+  return menu;
+}
 async function getOrdersHistory() {
   await axios.get();
 }
 
-export { getRestaurantList, restaurantList };
+export { getRestaurantList, restaurantList, menu, getMenu };
