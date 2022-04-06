@@ -23,8 +23,8 @@ public class OrderService {
     CustomerRepository customerRepository;
 
     public List<OrderDTO> getRestaurantOrders(String restaurantName) {
-        Restaurant restaurant=restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
-        List<Order> orders=orderRepository.findByRestaurant(restaurant);
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
+        List<Order> orders = orderRepository.findByRestaurant(restaurant);
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
     }
 
@@ -33,10 +33,16 @@ public class OrderService {
         List<Order> orders = orderRepository.findByCustomer(customer);
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
     }
-    public void addOrder(OrderDTO orderDTO, String customerUsername, String restaurantName){
-        Customer customer=customerRepository.findByUsername(customerUsername).orElse(new Customer());
-        Restaurant restaurant=restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
-        Order order=OrderMapper.getInstance().convertFromDTO(orderDTO,customer,restaurant);
+
+    public void addOrder(OrderDTO orderDTO, String customerUsername, String restaurantName) {
+        Customer customer = customerRepository.findByUsername(customerUsername).orElse(new Customer());
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
+        Order order = OrderMapper.getInstance().convertFromDTO(orderDTO, customer, restaurant);
+        //restaurant.getOrders().add(order);
+        //customer.getOrderHistory().add(order);
+        //restaurantRepository.save(restaurant);
+        //customerRepository.save(customer);
+
         orderRepository.save(order);
     }
 }

@@ -21,10 +21,10 @@ function Orders() {
           <td>
             {/* if status is pending */}
             <Button>
-              <span class="material-icons">done</span>
+              <span className="material-icons">done</span>
             </Button>
             <Button>
-              <span class="material-icons">close</span>
+              <span className="material-icons">close</span>
             </Button>
             {/* otherwise */}
             <Button>

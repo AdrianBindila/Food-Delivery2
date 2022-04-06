@@ -21,8 +21,8 @@ public class RestaurantService {
         return restaurantList.stream().map(restaurant -> RestaurantMapper.getInstance().convertToDTO(restaurant)).toList();
     }
     public void insertFood(FoodDTO foodDTO, String restaurantName){
-        Food food=FoodMapper.getInstance().convertFromDTO(foodDTO);
         Restaurant restaurant=restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
+        Food food=FoodMapper.getInstance().convertFromDTO(foodDTO);
         food.setRestaurant(restaurant);
         restaurant.getMenu().add(food);
         restaurantRepository.save(restaurant);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { user } from "./loginAPI";
 let restaurantList = undefined;
 async function getRestaurantList() {
   await axios
@@ -26,5 +27,19 @@ async function getMenu(restaurantName) {
 async function getOrdersHistory() {
   await axios.get();
 }
+async function getPendingOrder() {}
 
-export { getRestaurantList, restaurantList, menu, getMenu };
+async function sendOrder(order, restaurantName) {
+  await axios
+    .post("http://localhost:8080/api/order", order, {
+      params: {
+        username: user.username,
+        restaurantName: restaurantName,
+      },
+    })
+    .then((res) => {
+      menu = res.data;
+    })
+    .catch((err) => console.log(err));
+}
+export { getRestaurantList, restaurantList, menu, getMenu, sendOrder };

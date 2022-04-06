@@ -36,7 +36,7 @@ public class Food {
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
-    @ManyToMany(mappedBy = "items")
+    @ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Order> orders;
 

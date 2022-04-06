@@ -15,6 +15,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
+
 public class Order {
 
     @Id
@@ -34,7 +35,7 @@ public class Order {
     private int totalPrice;
 
     @Column(nullable = false)
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "order_food",
             joinColumns = @JoinColumn(name = "food_id"),

@@ -7,11 +7,12 @@ function Cart(props) {
     const order = {
       status: "PENDING",
       date: new Date().toISOString().substring(0, 10),
-      price: cart.reduce((total, item) => {
-        return total + item.price;
-      }),
+      totalPrice: cart.reduce((total, item) => total + item.price, 0),
+      items: cart,
     };
+    return order;
   }
+
   function deleteItem(item) {
     props.setCart((prevCart) => {
       return prevCart.filter((current) => {
@@ -19,6 +20,7 @@ function Cart(props) {
       });
     });
   }
+
   return (
     <>
       <Table>
@@ -55,8 +57,7 @@ function Cart(props) {
         size="lg"
         onClick={() => {
           let order = makeOrder(props.cart);
-          console.log(order);
-          //sendOrder(order);
+          sendOrder(order, props.restaurant);
         }}
       >
         Finish order

@@ -17,12 +17,14 @@ import Cart from "./Cart";
 function RestaurantList() {
   const [show, setShow] = useState(false);
   const [cart, setCart] = useState([]);
+  const [restaurant, setRestaurant] = useState("");
   const handleClose = () => {
     setShow(false);
     setCart([]);
   };
   const handleShow = () => setShow(true);
   function order(item) {
+    setRestaurant(item.name);
     getMenu(item.name).then((data) => {
       handleShow();
     });
@@ -97,7 +99,7 @@ function RestaurantList() {
               />
             </Tab>
             <Tab eventKey="cart" title="Cart">
-              <Cart cart={cart} setCart={setCart} />
+              <Cart cart={cart} setCart={setCart} restaurant={restaurant} />
             </Tab>
           </Tabs>
         </ModalBody>
