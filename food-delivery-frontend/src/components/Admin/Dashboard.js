@@ -1,46 +1,37 @@
-import { Button } from "react-bootstrap";
 import React from "react";
 import { useNavigate } from "react-router";
-import { user } from "../../api/loginAPI";
-import { menu } from "../../api/adminAPI";
+import { Button } from "react-bootstrap";
+import { getMenu, getOrders } from "../../api/adminAPI";
 
-function Dashboard(props) {
-  let admin = user;
-
+function Dashboard() {
+  const admin = JSON.parse(sessionStorage.getItem("user"));
   const navigate = useNavigate();
 
-  function handleClick(path) {
-    navigate(path);
-  }
-
   function viewOrders() {
-    //load restaurant's orders
-    navigate("view-orders");
+    getOrders().then(() => navigate("view-orders"));
   }
 
   function viewMenu() {
-    props.getMenu().then((data) => {
-      navigate("manage-restaurant");
-    });
+    getMenu().then(() => navigate("manage-restaurant"));
   }
 
   return (
-    <div>
+    <>
       {admin.restaurant ? (
-        <div>
+        <>
           <Button variant="primary" onClick={viewOrders}>
             View Orders
           </Button>
           <Button variant="primary" onClick={viewMenu}>
             Manage Restaurant
           </Button>
-        </div>
+        </>
       ) : (
-        <Button variant="primary" onClick={() => handleClick("add-restaurant")}>
+        <Button variant="primary" onClick={() => navigate("add-restaurant")}>
           Add Restaurant
         </Button>
       )}
-    </div>
+    </>
   );
 }
 

@@ -1,10 +1,9 @@
-import { Button } from "bootstrap";
-import { Container, Nav, Navbar, NavDropdown, NavLink } from "react-bootstrap";
-import { Link, Outlet } from "react-router-dom";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { Outlet } from "react-router-dom";
 
 function NavigationBar() {
   return (
-    <div>
+    <>
       <Navbar bg="light" expand="lg">
         <Container>
           <Navbar.Brand href="/login">Food Panda</Navbar.Brand>
@@ -18,12 +17,15 @@ function NavigationBar() {
               <Nav.Link href="/customer/cart">Cart</Nav.Link>
               <Nav.Link href="/customer/current-order">Current Order</Nav.Link>
               <Nav.Link href="/customer/order-history">Order History</Nav.Link>
+              <Nav.Link href="/login" onClick={() => sessionStorage.clear()}>
+                Logout
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
       <Outlet />
-    </div>
+    </>
   );
 }
 

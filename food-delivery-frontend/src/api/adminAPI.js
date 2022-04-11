@@ -1,24 +1,25 @@
 import axios from "axios";
-import { useState } from "react";
-import { user } from "./loginAPI";
 
 async function sendRestaurant(restaurant) {
+  let user = JSON.parse(sessionStorage.getItem("user"));
   await axios
-    .post("http://localhost:8080/api/admin/addRestaurant", restaurant, {
+    .post("/admin/addRestaurant", restaurant, {
       params: {
         username: user.username,
       },
     })
     .then((res) => {
+      user = JSON.parse(sessionStorage.getItem("user"));
       user.restaurant = res;
-      return res;
+      sessionStorage.setItem("user", JSON.stringify(user));
     })
     .then((err) => console.log(err));
 }
 
 async function sendFood(food) {
+  let user = JSON.parse(sessionStorage.getItem("user"));
   await axios
-    .post("http://localhost:8080/api/restaurant/food", food, {
+    .post("/restaurant/food", food, {
       params: {
         restaurantName: user.restaurant.name,
       },
@@ -27,24 +28,32 @@ async function sendFood(food) {
     .then((err) => console.log(err));
 }
 
-let menu = undefined;
-
 async function getMenu() {
+  let user = JSON.parse(sessionStorage.getItem("user"));
   await axios
-    .get("http://localhost:8080/api/restaurant/food", {
+    .get("/restaurant/food", {
       params: {
         restaurantName: user.restaurant.name,
       },
     })
     .then((res) => {
-      menu = res.data;
+      sessionStorage.setItem("menu", JSON.stringify(res.data));
     })
     .catch((err) => console.log(err));
-  return menu;
 }
 
-async function getOrders(restaurant) {
-  await axios.get("");
+async function getOrders() {
+  let user = JSON.parse(sessionStorage.getItem("user"));
+  await axios
+    .get("/order/restaurant", {
+      params: {
+        restaurantName: user.restaurant.name,
+      },
+    })
+    .then((res) => {
+      sessionStorage.setItem("restaurantOrders", JSON.stringify(res.data));
+    })
+    .catch((err) => console.log(err));
 }
 
-export { sendRestaurant, sendFood, getMenu, getOrders, menu };
+export { sendRestaurant, sendFood, getMenu, getOrders };

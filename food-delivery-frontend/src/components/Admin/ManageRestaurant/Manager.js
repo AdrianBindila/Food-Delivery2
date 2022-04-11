@@ -3,31 +3,32 @@ import { Tabs } from "react-bootstrap";
 import Menu from "./Menu";
 import FoodModal from "./FoodModal";
 import { useState } from "react";
-import { menu } from "../../../api/adminAPI";
+import _ from "lodash";
 
 function Manager() {
-  const [menuFood, setMenu] = useState(menu);
+  const [menu, setMenu] = useState(JSON.parse(sessionStorage.getItem("menu")));
+
   function onAdd(item) {
     setMenu((prevMenu) => [...prevMenu, item]);
   }
+  const categories = ["breakfast", "lunch", "dessert", "beverage"];
   return (
-    <div>
+    <>
       <FoodModal onAdd={onAdd} />
-      <Tabs defaultActiveKey="breakfast" className="mb-3">
-        <Tab eventKey="breakfast" title="Breakfast">
-          <Menu category="breakfast" menu={menuFood} />
-        </Tab>
-        <Tab eventKey="lunch" title="Lunch">
-          <Menu category="lunch" menu={menuFood} />
-        </Tab>
-        <Tab eventKey="dessert" title="Dessert">
-          <Menu category="dessert" menu={menuFood} />
-        </Tab>
-        <Tab eventKey="beverage" title="Beverage">
-          <Menu category="beverage" menu={menuFood} />
-        </Tab>
+      <Tabs defaultActiveKey={categories[0]} className="mb-3">
+        {categories.map((category) => {
+          return (
+            <Tab eventKey={category} title={_.startCase(category)}>
+              <Menu
+                menu={menu.filter((item) => {
+                  return item.category.toLowerCase() === category;
+                })}
+              />
+            </Tab>
+          );
+        })}
       </Tabs>
-    </div>
+    </>
   );
 }
 

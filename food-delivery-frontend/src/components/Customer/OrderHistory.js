@@ -1,6 +1,7 @@
 function OrderHistory() {
-    return(<div>
+    return (<div>
         <h1>OrderHistory</h1>
     </div>);
 }
+
 export default OrderHistory;

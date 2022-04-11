@@ -1,45 +1,46 @@
 import axios from "axios";
-import { user } from "./loginAPI";
-let restaurantList = undefined;
+
 async function getRestaurantList() {
   await axios
-    .get("http://localhost:8080/api/restaurant")
+    .get("/restaurant")
     .then((res) => {
-      restaurantList = res.data;
+      sessionStorage.setItem("restaurantList", JSON.stringify(res.data));
     })
     .catch((err) => console.log(err));
-  return restaurantList;
 }
-let menu = undefined;
+
 async function getMenu(restaurantName) {
   await axios
-    .get("http://localhost:8080/api/restaurant/food", {
+    .get("/restaurant/food", {
       params: {
         restaurantName: restaurantName,
       },
     })
     .then((res) => {
-      menu = res.data;
+      sessionStorage.setItem("menu", JSON.stringify(res.data));
     })
     .catch((err) => console.log(err));
-  return menu;
 }
+
 async function getOrdersHistory() {
-  await axios.get();
+  await axios
+    .get("/order/customer")
+    .then((res) => {
+      sessionStorage.setItem("orderHistory", JSON.stringify(res.data));
+    })
+    .catch((err) => console.log(err));
 }
-async function getPendingOrder() {}
 
 async function sendOrder(order, restaurantName) {
+  let user = JSON.parse(sessionStorage.getItem("user"));
   await axios
-    .post("http://localhost:8080/api/order", order, {
+    .post("/order", order, {
       params: {
         username: user.username,
         restaurantName: restaurantName,
       },
-    })
-    .then((res) => {
-      menu = res.data;
-    })
+    }) //TODO: update the list of orders
     .catch((err) => console.log(err));
 }
-export { getRestaurantList, restaurantList, menu, getMenu, sendOrder };
+
+export { getRestaurantList, getMenu, sendOrder, getOrdersHistory };

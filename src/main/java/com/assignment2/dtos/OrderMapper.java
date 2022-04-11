@@ -17,14 +17,16 @@ public class OrderMapper {
 
     public static OrderMapper getInstance() {
         return instance;
-    }
+    }//Use a response factory for http responses
 
     public OrderDTO convertToDTO(Order order) {
         OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setCustomerFullName(order.getCustomer().getFirstName()+" "+order.getCustomer().getLastName());
         orderDTO.setDate(order.getDate());
-        order.getItems().forEach(item -> orderDTO.getItems().add(FoodMapper.getInstance().convertToDTO(item)));//IDK if this does what it should
+        orderDTO.setDeliveryAddress(order.getDeliveryAddress());
         orderDTO.setStatus(order.getStatus());
         orderDTO.setTotalPrice(order.getTotalPrice());
+        order.getItems().forEach(item -> orderDTO.getItems().add(FoodMapper.getInstance().convertToDTO(item)));
         return orderDTO;
     }
 
@@ -56,11 +58,3 @@ public class OrderMapper {
         return order;
     }
 }
-//orderDTO
-//        .getItems()
-//        .stream()
-//        .filter(item ->
-//        {//for each food item from the orderDTO find the corresponding menu item from the restaurant menu, based on name
-//        return restaurant.getMenu().stream().anyMatch(menuItem -> menuItem.getName().equals(item.getName()));
-//        })
-//        .collect(Collectors.toList()))

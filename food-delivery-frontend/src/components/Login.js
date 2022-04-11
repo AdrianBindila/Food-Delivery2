@@ -4,15 +4,11 @@ import { useNavigate } from "react-router";
 import { getRestaurantList } from "../api/customerAPI";
 
 function Login(props) {
+  const navigate = useNavigate();
   const [login, setLogin] = useState({
     username: "",
     password: "",
   });
-
-  const navigate = useNavigate();
-  function register() {
-    navigate("/register");
-  }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -60,10 +56,12 @@ function Login(props) {
           onChange={handleChange}
         />
       </Form.Group>
+
       <Button variant="primary" type="submit">
         Log in
       </Button>
-      <Button variant="primary" onClick={register}>
+
+      <Button variant="primary" onClick={() => navigate("/register")}>
         Register
       </Button>
     </Form>
