@@ -1,0 +1,139 @@
+/* @import "./Theme/base.css"; */
+
+:root {
+    --primary-color: #0a80af;
+    --primary-color-dark: #096e97;
+    --primary-color-darker: #075d7f;
+    --secondary-color: #e79403;
+    --secondary-color-dark: #ce8403;
+    --secondary-color-darker: #b57402;
+    --tertiary-color: #739106;
+    --tertiary-color-dark: #607905;
+    --tertiary-color-darker: #4c6004;
+    --quaternary-color: #342628;
+    --quaternary-color-dark: #251b1d;
+    --quaternary-color-darker: #171011;
+    --quinary-color: #b3dee5;
+    --senary-color: #fae6b1;
+    --danger-color: #e24000;
+    --danger-color-dark: #c93900;
+    --danger-color-darker: #af3200;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.primary-button,
+.secondary-button,
+.tertiary-button,
+.quaternary-button,
+.danger-button {
+    color: white;
+}
+
+.primary-button {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color-dark);
+}
+.primary-button:hover {
+    background-color: var(--primary-color-dark);
+    border: 1px solid var(--primary-color-darker);
+}
+.primary-button:focus {
+    background-color: var(--primary-color);
+}
+
+.secondary-button {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--secondary-color-dark);
+}
+.secondary-button:hover {
+    background-color: var(--secondary-color-dark);
+    border: 1px solid var(--secondary-color-darker);
+}
+.secondary-button:focus {
+    background-color: var(--secondary-color);
+}
+
+.tertiary-button {
+    background-color: var(--tertiary-color);
+    border: 1px solid var(--tertiary-color-dark);
+}
+.tertiary-button:hover {
+    background-color: var(--tertiary-color-dark);
+    border: 1px solid var(--tertiary-color-darker);
+}
+.tertiary-button:focus {
+    background-color: var(--tertiary-color);
+}
+
+.quaternary-button {
+    background-color: var(--quaternary-color);
+    border: 1px solid var(--quaternary-color-dark);
+}
+.quaternary-button:hover {
+    background-color: var(--quaternary-color-dark);
+    border: 1px solid var(--quaternary-color-darker);
+}
+.quaternary-button:focus {
+    background-color: var(--quaternary-color);
+}
+
+.danger-button {
+    background-color: var(--danger-color);
+    border: 1px solid var(--danger-color-dark);
+}
+.danger-button:hover {
+    background-color: var(--danger-color-dark);
+    border: 1px solid var(--danger-color-darker);
+}
+/* .danger-button:focus {} */
+
+.hlist {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.loginForm,
+.registerForm {
+    margin: 20px 0;
+    /* width: 50%; */
+    /* max-width: 350px; */
+    padding: 50px 40px;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: white;
+    box-shadow: 0 0 10px 2px lightgray;
+}
+
+.loginForm .title,
+.registerForm .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.registerForm {
+    width: 70%;
+    max-width: 550px;
+}
+
+.hlist div {
+    width: 49%;
+}

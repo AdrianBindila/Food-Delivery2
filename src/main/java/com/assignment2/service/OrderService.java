@@ -4,6 +4,7 @@ import com.assignment2.dtos.OrderDTO;
 import com.assignment2.dtos.OrderMapper;
 import com.assignment2.model.Customer;
 import com.assignment2.model.Order;
+import com.assignment2.model.OrderStatus;
 import com.assignment2.model.Restaurant;
 import com.assignment2.repository.CustomerRepository;
 import com.assignment2.repository.OrderRepository;
@@ -39,5 +40,11 @@ public class OrderService {
         Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
         Order order = OrderMapper.getInstance().convertFromDTO(orderDTO, customer, restaurant);
         orderRepository.save(order);
+    }
+
+    public List<OrderDTO> getPendingOrders(String username) {
+        Customer customer=customerRepository.findByUsername(username).orElse(new Customer());
+        List<Order> orders=orderRepository.findByCustomerAndStatus(customer, OrderStatus.PENDING);
+        return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
     }
 }

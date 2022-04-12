@@ -12,8 +12,8 @@ import Cart from "./Cart";
 import Menu from "../Admin/ManageRestaurant/Menu";
 
 function OrderModal(props) {
-  const categories = ["breakfast", "lunch", "dessert", "beverage"];
   const [cart, setCart] = useState([]);
+  const categories = ["breakfast", "lunch", "dessert", "beverage"];
   const handleClose = () => {
     props.setShow(false);
     setCart([]);
@@ -41,7 +41,12 @@ function OrderModal(props) {
             );
           })}
           <Tab eventKey="cart" title="Cart">
-            <Cart cart={cart} setCart={setCart} restaurant={props.restaurant} />
+            <Cart
+              cart={cart}
+              setCart={setCart}
+              restaurant={props.restaurant}
+              onOrder={handleClose}
+            />
           </Tab>
         </Tabs>
       </ModalBody>

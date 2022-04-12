@@ -42,4 +42,9 @@ public class CustomerController {
         List<OrderDTO> orderDTOS=orderService.getCustomerOrders(username);
         return ResponseEntity.accepted().headers(headers).body(orderDTOS);
     }
+    @GetMapping("/order/pending")
+    public ResponseEntity<List<OrderDTO>> getPendingOrders(@Param("username") String username){
+        List<OrderDTO> orders=orderService.getPendingOrders(username);
+        return ResponseEntity.ok(orders);
+    }
 }

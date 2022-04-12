@@ -2,6 +2,7 @@ import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { getRestaurantList } from "../api/customerAPI";
+import styles from "./styles.module.css";
 
 function Login(props) {
   const navigate = useNavigate();
@@ -34,37 +35,41 @@ function Login(props) {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3">
-        <Form.Label>Username</Form.Label>
-        <Form.Control
-          type="username"
-          placeholder="Username"
-          name="username"
-          value={login.username}
-          onChange={handleChange}
-        />
-      </Form.Group>
+    <div className={styles.container}>
+      <div className={styles.loginForm}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="username"
+              placeholder="Username"
+              name="username"
+              value={login.username}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={login.password}
-          onChange={handleChange}
-        />
-      </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={login.password}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Log in
-      </Button>
+          <Button variant="primary" type="submit">
+            Log in
+          </Button>
 
-      <Button variant="primary" onClick={() => navigate("/register")}>
-        Register
-      </Button>
-    </Form>
+          <Button variant="primary" onClick={() => navigate("/register")}>
+            Register
+          </Button>
+        </Form>
+      </div>
+    </div>
   );
 }
 

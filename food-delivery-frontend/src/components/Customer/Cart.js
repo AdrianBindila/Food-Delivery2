@@ -1,20 +1,28 @@
+import {useEffect, useState} from "react";
 import {Button, Table} from "react-bootstrap";
 import {sendOrder} from "../../api/customerAPI";
 
 function Cart(props) {
+    const updateCart = props.cart.reduce((total, item) => total + item.price, 0);
+    const [total, setTotal] = useState(updateCart);
+
+    useEffect(() => {
+        setTotal(updateCart)
+    }, [props.cart]);
+
     function makeOrder(cart) {
         return {
             status: "PENDING",
             date: new Date().toISOString().substring(0, 10),
-            totalPrice: cart.reduce((total, item) => total + item.price, 0),
+            totalPrice: total,
             items: cart,
         };
     }
 
-    function deleteItem(item) {
+    function deleteItem(id) {
         props.setCart((prevCart) => {
-            return prevCart.filter((current) => {
-                return current !== item; //currently deletes all identical items, so multiple beers are gone with one click
+            return prevCart.filter((current,index) => {
+                return index !== id;
             });
         });
     }
@@ -32,6 +40,7 @@ function Cart(props) {
                 </thead>
                 <tbody>
                 {props.cart.map((item, index) => {
+                    item.id=index;
                     return (
                         <tr key={index}>
                             <td>{item.name}</td>
@@ -40,7 +49,7 @@ function Cart(props) {
                             <td>
                                 <Button
                                     onClick={() => {
-                                        deleteItem(item);
+                                        deleteItem(index);
                                     }}
                                 >
                                     X
@@ -51,11 +60,15 @@ function Cart(props) {
                 })}
                 </tbody>
             </Table>
+            <p>Total price: {total}</p>
             <Button
+                disabled={props.cart.length===0}
                 size="lg"
                 onClick={() => {
                     let order = makeOrder(props.cart);
-                    sendOrder(order, props.restaurant);
+                    sendOrder(order, props.restaurant).then(
+                        props.onOrder()
+                    );
                 }}
             >
                 Finish order
