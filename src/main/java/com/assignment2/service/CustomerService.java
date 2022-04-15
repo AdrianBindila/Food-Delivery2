@@ -16,10 +16,13 @@ public class CustomerService {
         return customerRepository.findById(customerId).orElse(new Customer());
     }
     public Customer getCustomer(UserDTO loginDTO){
-        return customerRepository.findByUsernameAndPassword(loginDTO.getUsername(), loginDTO.getPassword()).orElse(new Customer());
+        Encrypter encrypter=new Encrypter();
+        return customerRepository.findByUsernameAndPassword(loginDTO.getUsername(), encrypter.encrypt(loginDTO.getPassword())).orElse(new Customer());
     }
     public void insertCustomer(RegisterDTO registerDTO){
         Customer customer=RegisterMapper.getInstance().convertFromDTO(registerDTO);
+        Encrypter encrypter=new Encrypter();
+        customer.setPassword(encrypter.encrypt(customer.getPassword()));
         customerRepository.save(customer);
     }
 }

@@ -8,7 +8,7 @@ import {
   ModalTitle,
   Tabs,
 } from "react-bootstrap";
-import Cart from "./Cart";
+import Cart from "./Cart/Cart";
 import Menu from "../Admin/ManageRestaurant/Menu";
 
 function OrderModal(props) {

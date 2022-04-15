@@ -1,5 +1,5 @@
-import Orders from "./Orders"
-import {getOrdersHistory} from "../../api/customerAPI";
+import Orders from "../Orders"
+import {getOrdersHistory} from "../../../api/customerAPI";
 import {useEffect, useState} from "react";
 
 function OrderHistory() {

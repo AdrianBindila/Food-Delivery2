@@ -1,34 +1,55 @@
-import {Container, Nav, Navbar} from "react-bootstrap";
-import {Outlet} from "react-router-dom";
-import {getOrdersHistory} from "../api/customerAPI";
-import {useNavigate} from "react-router";
+import {
+  Button,
+  Container,
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavLink,
+} from "react-bootstrap";
+import { Outlet } from "react-router-dom";
+import { getOrdersHistory } from "../api/customerAPI";
+import { useNavigate } from "react-router";
+import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
+import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
+import { useEffect, useState } from "react";
+import RestaurantSearch from "./Customer/RestaurantList/RestaurantSearch";
 
 function NavigationBar() {
-    const nav=useNavigate();
-    return (
-        <>
-            <Navbar bg="light" expand="lg">
-                <Container>
-                    <Navbar.Brand href="/login">Food Panda</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            <Nav.Link href="/login">Login</Nav.Link>
-                            <Nav.Link href="/register">Register</Nav.Link>
-                            <Nav.Link href="/admin">Admin</Nav.Link>
-                            <Nav.Link href="/customer">Customer</Nav.Link>
-                            <Nav.Link href="/customer/current-order">Current Order</Nav.Link>
-                            <Nav.Link href="/customer/order-history">Order History</Nav.Link>
-                            <Nav.Link href="/login" onClick={() => sessionStorage.clear()}>
-                                Logout
-                            </Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            <Outlet/>
-        </>
-    );
+  const [isAdmin, setAdmin] = useState(false);
+
+  return (
+    <>
+      <Navbar bg="light" expand="lg">
+        <Container>
+          <NavbarBrand href="/login">Food Panda</NavbarBrand>
+          <NavbarToggle aria-controls="basic-navbar-nav" />
+          <NavbarCollapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <NavLink href="/login">Login</NavLink>
+              <NavLink href="/register">Register</NavLink>
+              {isAdmin && <NavLink href="/admin">Admin</NavLink>}
+              {!isAdmin && (
+                <>
+                  <NavLink href="/customer">Customer</NavLink>
+                  <NavLink href="/customer/current-order">
+                    Current Order
+                  </NavLink>
+                  <NavLink href="/customer/order-history">
+                    Order History
+                  </NavLink>
+                  <RestaurantSearch/>
+                </>
+              )}
+              <NavLink href="/login" onClick={() => sessionStorage.clear()}>
+                Logout
+              </NavLink>
+            </Nav>
+          </NavbarCollapse>
+        </Container>
+      </Navbar>
+      <Outlet />
+    </>
+  );
 }
 
 export default NavigationBar;

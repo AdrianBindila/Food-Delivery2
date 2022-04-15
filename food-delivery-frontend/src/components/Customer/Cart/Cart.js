@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Button, Table} from "react-bootstrap";
-import {sendOrder} from "../../api/customerAPI";
+import {sendOrder} from "../../../api/customerAPI";
 
 function Cart(props) {
     const updateCart = props.cart.reduce((total, item) => total + item.price, 0);

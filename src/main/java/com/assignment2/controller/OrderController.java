@@ -31,4 +31,8 @@ public class OrderController {
         List<OrderDTO> orders=orderService.getCustomerOrders(username);
         return ResponseEntity.accepted().body(orders);
     }
+    @PutMapping("restaurant")
+    public void updateOrder(@Param("id") Long id){
+
+    }
 }

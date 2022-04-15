@@ -47,4 +47,8 @@ public class OrderService {
         List<Order> orders=orderRepository.findByCustomerAndStatus(customer, OrderStatus.PENDING);
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
     }
+
+    public void updateOrder(Long id){
+
+    }
 }
