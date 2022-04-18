@@ -8,7 +8,7 @@ import {
 } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { getOrdersHistory } from "../api/customerAPI";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 import { useEffect, useState } from "react";
@@ -16,7 +16,7 @@ import RestaurantSearch from "./Customer/RestaurantList/RestaurantSearch";
 
 function NavigationBar() {
   const [isAdmin, setAdmin] = useState(false);
-
+  const location = useLocation();
   return (
     <>
       <Navbar bg="light" expand="lg">
@@ -37,7 +37,7 @@ function NavigationBar() {
                   <NavLink href="/customer/order-history">
                     Order History
                   </NavLink>
-                  <RestaurantSearch/>
+                  {location.pathname === "/customer" && <RestaurantSearch />}
                 </>
               )}
               <NavLink href="/login" onClick={() => sessionStorage.clear()}>
