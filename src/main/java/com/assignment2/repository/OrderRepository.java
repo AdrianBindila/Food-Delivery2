@@ -15,5 +15,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> findByRestaurant(Restaurant r);
 
-    List<Order> findByCustomerAndStatus(Customer c, OrderStatus orderStatus);
+    List<Order> findByStatusNotLikeAndStatusNotLikeAndCustomer(OrderStatus status1,OrderStatus status2, Customer customer);
 }

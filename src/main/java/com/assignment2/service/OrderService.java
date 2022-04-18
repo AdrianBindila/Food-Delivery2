@@ -44,7 +44,7 @@ public class OrderService {
 
     public List<OrderDTO> getPendingOrders(String username) {
         Customer customer=customerRepository.findByUsername(username).orElse(new Customer());
-        List<Order> orders=orderRepository.findByCustomerAndStatus(customer, OrderStatus.PENDING);
+        List<Order> orders=orderRepository.findByStatusNotLikeAndStatusNotLikeAndCustomer(OrderStatus.DELIVERED,OrderStatus.DECLINED,customer);
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
     }
 

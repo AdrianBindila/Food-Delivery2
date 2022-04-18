@@ -22,7 +22,7 @@ public class CustomerController {
     @Autowired
     OrderService orderService;
     @GetMapping
-    public ResponseEntity<Customer> getCustomer(UserDTO loginDTO) {//TODO:change to DTO
+    public ResponseEntity<Customer> getCustomer(UserDTO loginDTO) {
         Customer customer = customerService.getCustomer(loginDTO);
         System.out.println(customer);
         HttpHeaders headers = new HttpHeaders();
