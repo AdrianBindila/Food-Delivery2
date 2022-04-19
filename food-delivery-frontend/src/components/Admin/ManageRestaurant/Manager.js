@@ -4,6 +4,7 @@ import Menu from "./Menu";
 import FoodModal from "./FoodModal";
 import { useState } from "react";
 import _ from "lodash";
+import PDFExportButton from "./PDFExportButton";
 
 function Manager() {
   const [menu, setMenu] = useState(JSON.parse(sessionStorage.getItem("menu")));
@@ -15,6 +16,7 @@ function Manager() {
 
   return (
     <>
+      <PDFExportButton />
       <FoodModal onAdd={onAdd} />
       <Tabs defaultActiveKey={categories[0]} className="mb-3">
         {categories.map((category) => {
