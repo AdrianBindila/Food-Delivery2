@@ -16,7 +16,7 @@ function Manager() {
 
   return (
     <>
-      <PDFExportButton />
+      <PDFExportButton menu={menu} />
       <FoodModal onAdd={onAdd} />
       <Tabs defaultActiveKey={categories[0]} className="mb-3">
         {categories.map((category) => {

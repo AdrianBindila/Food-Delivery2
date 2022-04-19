@@ -19,6 +19,9 @@ public class User{
     @GeneratedValue
     public Long id;
 
+    @Column(nullable = false, unique = true)//TODO: remove this field from customer and its DTO
+    public String email;
+
     @Column(nullable = false, unique = true)
     public String username;
 

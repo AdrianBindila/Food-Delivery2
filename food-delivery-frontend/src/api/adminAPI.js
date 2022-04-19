@@ -66,4 +66,17 @@ async function updateOrder(order) {
     .catch((err) => console.log(err));
 }
 
-export { sendRestaurant, sendFood, getMenu, getOrders, updateOrder };
+async function getPDF(menu) {
+  let user = JSON.parse(sessionStorage.getItem("user"));
+  await axios
+    .post("/admin/menuPDF", menu, {
+      params: {
+        restaurantName: user.restaurant.name,
+        username: user.username,
+      },
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+}
+
+export { sendRestaurant, sendFood, getMenu, getOrders, updateOrder, getPDF };
