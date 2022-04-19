@@ -37,7 +37,7 @@ function NavigationBar() {
                   <NavLink href="/customer/order-history">
                     Order History
                   </NavLink>
-                  {location.pathname === "/customer" && <RestaurantSearch />}
+                  {/* {location.pathname === "/customer" && <RestaurantSearch />} */}
                 </>
               )}
               <NavLink href="/login" onClick={() => sessionStorage.clear()}>

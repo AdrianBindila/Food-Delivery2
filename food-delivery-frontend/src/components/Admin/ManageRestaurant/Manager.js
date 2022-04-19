@@ -12,6 +12,7 @@ function Manager() {
     setMenu((prevMenu) => [...prevMenu, item]);
   }
   const categories = ["breakfast", "lunch", "dessert", "beverage"];
+
   return (
     <>
       <FoodModal onAdd={onAdd} />
@@ -20,9 +21,12 @@ function Manager() {
           return (
             <Tab eventKey={category} title={_.startCase(category)}>
               <Menu
-                menu={menu.filter((item) => {
-                  return item.category.toLowerCase() === category;
-                })}
+                menu={
+                  menu &&
+                  menu.filter((item) => {
+                    return item.category.toLowerCase() === category;
+                  })
+                }
               />
             </Tab>
           );

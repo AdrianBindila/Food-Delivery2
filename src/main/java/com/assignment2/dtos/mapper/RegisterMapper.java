@@ -1,5 +1,6 @@
-package com.assignment2.dtos;
+package com.assignment2.dtos.mapper;
 
+import com.assignment2.dtos.RegisterDTO;
 import com.assignment2.model.Customer;
 
 public class RegisterMapper {

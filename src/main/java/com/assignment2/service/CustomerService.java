@@ -2,7 +2,7 @@ package com.assignment2.service;
 
 import com.assignment2.dtos.UserDTO;
 import com.assignment2.dtos.RegisterDTO;
-import com.assignment2.dtos.RegisterMapper;
+import com.assignment2.dtos.mapper.RegisterMapper;
 import com.assignment2.model.Customer;
 import com.assignment2.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.assignment2.service;
 
 import com.assignment2.dtos.OrderDTO;
-import com.assignment2.dtos.OrderMapper;
+import com.assignment2.dtos.mapper.OrderMapper;
 import com.assignment2.model.Customer;
 import com.assignment2.model.Order;
 import com.assignment2.model.OrderStatus;
@@ -43,12 +43,14 @@ public class OrderService {
     }
 
     public List<OrderDTO> getPendingOrders(String username) {
-        Customer customer=customerRepository.findByUsername(username).orElse(new Customer());
-        List<Order> orders=orderRepository.findByStatusNotLikeAndStatusNotLikeAndCustomer(OrderStatus.DELIVERED,OrderStatus.DECLINED,customer);
+        Customer customer = customerRepository.findByUsername(username).orElse(new Customer());
+        List<Order> orders = orderRepository.findByStatusNotLikeAndStatusNotLikeAndCustomer(OrderStatus.DELIVERED, OrderStatus.DECLINED, customer);
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
     }
 
-    public void updateOrder(Long id){
-
+    public void updateOrderStatus(OrderDTO orderDTO) {
+        Order currentOrder=orderRepository.getById(orderDTO.getOrderId());
+        currentOrder.setStatus(orderDTO.getStatus());
+        orderRepository.save(currentOrder);
     }
 }

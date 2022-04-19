@@ -19,6 +19,7 @@ function Dashboard() {
     <>
       {admin.restaurant ? (
         <>
+          <h1>{admin.restaurant.name}</h1>
           <Button variant="primary" onClick={viewOrders}>
             View Orders
           </Button>

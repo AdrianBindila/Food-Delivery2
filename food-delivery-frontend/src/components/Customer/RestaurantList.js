@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { getMenu } from "../../api/customerAPI";
 import OrderModal from "./OrderModal";
+import RestaurantSearch from "./RestaurantList/RestaurantSearch";
 
 function RestaurantList() {
   const [restaurant, setRestaurant] = useState("");
   const [menu, setMenu] = useState([]);
   const [show, setShow] = useState(false);
+  const [search, setSearch] = useState("");
+  const [restaurantList, setRestaurantList] = useState(
+    JSON.parse(sessionStorage.getItem("restaurantList"))
+  );
+
   function order(item) {
     setRestaurant(item.name);
     getMenu(item.name).then(() => {
@@ -14,11 +20,22 @@ function RestaurantList() {
       setShow(true);
     });
   }
-
-  const restaurantList = JSON.parse(sessionStorage.getItem("restaurantList"));
+  function searchRestaurants(event) {
+    const restaurants = JSON.parse(sessionStorage.getItem("restaurantList"));
+    const filteredRestaurants = restaurants.filter((restaurant) => {
+      return restaurant.name.includes(search);
+    });
+    setRestaurantList(filteredRestaurants);
+    event.preventDefault();
+  }
 
   return (
     <>
+      <RestaurantSearch
+        search={search}
+        setSearch={setSearch}
+        handleSubmit={searchRestaurants}
+      />
       <Table hover>
         <thead>
           <tr>

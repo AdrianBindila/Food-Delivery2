@@ -13,13 +13,6 @@ import {
 function Orders(props) {
   const [show, setShow] = useState(false);
   const [orderList, setOrderList] = useState([]);
-  const status = {
-    pending: "PENDING",
-    accepted: "ACCEPTED",
-    in_delivery: "IN_DELIVERY",
-    delivered: "DELIVERED",
-    declined: "DECLINED",
-  };
 
   const handleClose = () => {
     setShow(false);
@@ -73,27 +66,27 @@ function Orders(props) {
           <ModalTitle>Ordered items:</ModalTitle>
         </ModalHeader>
         <ModalBody>
-            <Table>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                {orderList.map((item, index) => {
-                    item.id=index;
-                    return (
-                        <tr key={index}>
-                            <td>{item.name}</td>
-                            <td>{item.description}</td>
-                            <td>{item.price}</td>
-                        </tr>
-                    );
-                })}
-                </tbody>
-            </Table>
+          <Table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orderList.map((item, index) => {
+                item.id = index;
+                return (
+                  <tr key={index}>
+                    <td>{item.name}</td>
+                    <td>{item.description}</td>
+                    <td>{item.price}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
         </ModalBody>
       </Modal>
     </>

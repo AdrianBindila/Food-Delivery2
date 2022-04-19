@@ -1,5 +1,6 @@
-package com.assignment2.dtos;
+package com.assignment2.dtos.mapper;
 
+import com.assignment2.dtos.FoodDTO;
 import com.assignment2.model.Food;
 import com.assignment2.model.Restaurant;
 

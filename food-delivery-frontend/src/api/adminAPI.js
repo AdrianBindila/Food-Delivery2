@@ -42,7 +42,7 @@ async function getMenu() {
     .catch((err) => console.log(err));
 }
 
-async function getOrders() {//need order id in order DTO
+async function getOrders() {
   let user = JSON.parse(sessionStorage.getItem("user"));
   await axios
     .get("/order/restaurant", {
@@ -56,13 +56,14 @@ async function getOrders() {//need order id in order DTO
     .catch((err) => console.log(err));
 }
 
-async function updateOrder(order){//update by id, since it's the only unique field
-    await axios
-        .put("/order/restaurant",{
-            params:{
-
-            }
-        })
+async function updateOrder(order) {
+  await axios
+    .post("/order/restaurant/update", order)
+    .then(
+      (res) => console.log(res)
+      // sessionStorage.setItem("restaurantOrders", JSON.stringify(res.data))
+    )
+    .catch((err) => console.log(err));
 }
 
 export { sendRestaurant, sendFood, getMenu, getOrders, updateOrder };

@@ -7,24 +7,14 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 
-function RestaurantSearch() {
-  const [search, setSearch] = useState("");
-
+function RestaurantSearch(props) {
   function handleChange(event) {
     const value = event.target.value;
-    setSearch(value);
-  }
-
-  function handleSubmit() {
-    //search in the array of restaurants
-    const restaurants = JSON.parse(sessionStorage.getItem("restaurantList"));
-    restaurants.filter((restaurant) => {
-      return restaurant.name.includes(search);
-    });
+    props.setSearch(value);
   }
 
   return (
-    <Form className="d-flex input-group w-auto">
+    <Form className="d-flex input-group w-auto" onSubmit={props.handleSubmit}>
       <FormGroup>
         <FormControl
           type="search"
@@ -32,11 +22,13 @@ function RestaurantSearch() {
           placeholder="Type query"
           name="search"
           aria-label="Search"
-          value={search}
+          value={props.search}
           onChange={handleChange}
         />
       </FormGroup>
-      <Button color="primary">Search</Button>
+      <Button color="primary" type="submit">
+        Search
+      </Button>
     </Form>
   );
 }

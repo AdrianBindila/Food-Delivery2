@@ -1,5 +1,6 @@
-package com.assignment2.dtos;
+package com.assignment2.dtos.mapper;
 
+import com.assignment2.dtos.RestaurantDTO;
 import com.assignment2.model.Restaurant;
 
 import java.util.ArrayList;

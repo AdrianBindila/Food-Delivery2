@@ -1,6 +1,8 @@
-package com.assignment2.dtos;
+package com.assignment2.dtos.mapper;
 
 
+import com.assignment2.dtos.FoodDTO;
+import com.assignment2.dtos.OrderDTO;
 import com.assignment2.model.Customer;
 import com.assignment2.model.Food;
 import com.assignment2.model.Order;
@@ -21,7 +23,8 @@ public class OrderMapper {
 
     public OrderDTO convertToDTO(Order order) {
         OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setCustomerFullName(order.getCustomer().getFirstName()+" "+order.getCustomer().getLastName());
+        orderDTO.setOrderId(order.getOrderId());
+        orderDTO.setCustomerFullName(order.getCustomer().getFirstName() + " " + order.getCustomer().getLastName());
         orderDTO.setDate(order.getDate());
         orderDTO.setDeliveryAddress(order.getDeliveryAddress());
         orderDTO.setStatus(order.getStatus());
@@ -31,9 +34,8 @@ public class OrderMapper {
     }
 
     public Order convertFromDTO(OrderDTO orderDTO, Customer customer, Restaurant restaurant) {
-
         Order order = new Order();
-
+        order.setOrderId(orderDTO.getOrderId());
         order.setDate(orderDTO.getDate());
         List<Food> foodList = new ArrayList<>();
         for (FoodDTO item :

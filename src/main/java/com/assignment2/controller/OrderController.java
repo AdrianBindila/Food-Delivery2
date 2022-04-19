@@ -1,11 +1,9 @@
 package com.assignment2.controller;
 
 import com.assignment2.dtos.OrderDTO;
-import com.assignment2.model.Order;
 import com.assignment2.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +29,8 @@ public class OrderController {
         List<OrderDTO> orders=orderService.getCustomerOrders(username);
         return ResponseEntity.accepted().body(orders);
     }
-    @PutMapping("restaurant")
-    public void updateOrder(@Param("id") Long id){
-
+    @PostMapping("/restaurant/update")
+    public void updateOrder(@RequestBody OrderDTO orderDTO){
+        orderService.updateOrderStatus(orderDTO);
     }
 }

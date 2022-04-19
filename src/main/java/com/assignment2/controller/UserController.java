@@ -2,6 +2,7 @@ package com.assignment2.controller;
 
 import com.assignment2.dtos.UserDTO;
 import com.assignment2.model.User;
+import com.assignment2.service.Encrypter;
 import com.assignment2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -21,7 +22,8 @@ public class UserController {
     public ResponseEntity<UserDTO> login(@Param("username") String username, @Param("password") String password) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "UserController");
-        UserDTO userDTO = userService.getUser(username, password);
+        Encrypter encrypter=new Encrypter();
+        UserDTO userDTO = userService.getUser(username, encrypter.encrypt(password));
         return ResponseEntity.accepted().headers(headers).body(userDTO);
     }
 }

@@ -1,7 +1,7 @@
 package com.assignment2.service;
 
 import com.assignment2.dtos.FoodDTO;
-import com.assignment2.dtos.FoodMapper;
+import com.assignment2.dtos.mapper.FoodMapper;
 import com.assignment2.model.Food;
 import com.assignment2.model.Restaurant;
 import com.assignment2.repository.FoodRepository;

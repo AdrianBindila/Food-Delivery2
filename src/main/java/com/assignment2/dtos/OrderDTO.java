@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderDTO {
     @NonNull
+    private Long orderId;
+    @NonNull
     private String customerFullName;
     @NonNull
     private LocalDate date;
