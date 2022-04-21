@@ -6,6 +6,7 @@ import com.assignment2.model.Admin;
 import com.assignment2.service.AdminService;
 import com.assignment2.service.PDFExporter;
 import com.itextpdf.text.Document;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
@@ -16,15 +17,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
+@Log4j2
 public class AdminController {
     @Autowired
     AdminService adminService;
-
+    public AdminController(){
+        log.info("HELP");
+    }
     @GetMapping
     public ResponseEntity<Admin> getAdmin(@Param("username") String username, @Param("password") String password) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "AdminController");
         Admin admin = adminService.findAdmin(username, password);
+
         return ResponseEntity.accepted().headers(headers).body(admin);
     }
 
