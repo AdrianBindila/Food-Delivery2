@@ -1,8 +1,8 @@
 package com.assignment2.controller;
 
-import com.assignment2.dtos.UserDTO;
 import com.assignment2.dtos.OrderDTO;
 import com.assignment2.dtos.RegisterDTO;
+import com.assignment2.dtos.UserDTO;
 import com.assignment2.model.Customer;
 import com.assignment2.service.CustomerService;
 import com.assignment2.service.OrderService;

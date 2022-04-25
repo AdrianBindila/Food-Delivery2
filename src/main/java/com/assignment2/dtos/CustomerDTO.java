@@ -1,7 +1,6 @@
 package com.assignment2.dtos;
 
 import lombok.Data;
-import org.springframework.lang.NonNull;
 
 @Data
 public class CustomerDTO extends UserDTO{

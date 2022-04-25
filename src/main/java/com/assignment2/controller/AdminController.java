@@ -5,7 +5,6 @@ import com.assignment2.dtos.RestaurantDTO;
 import com.assignment2.model.Admin;
 import com.assignment2.service.AdminService;
 import com.assignment2.service.PDFExporter;
-import com.itextpdf.text.Document;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;

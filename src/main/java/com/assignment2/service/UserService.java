@@ -12,17 +12,31 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type User service retrieves the user from a database based on its credentials.
+ */
 @Service
 @Log4j2
 public class UserService {
+    /**
+     * The User repository.
+     */
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * Gets user from the database.
+     *
+     * @param username the username
+     * @param password the password
+     * @return the user
+     */
     public UserDTO getUser(String username, String password) {
         User user = null;
         try {
             user = userRepository.findByUsernameAndPassword(username, password).orElseThrow(Exception::new);
         } catch (Exception e) {
+            log.error("Could not find user.");
             throw new RuntimeException(e);
         }
         if (user instanceof Admin admin) {

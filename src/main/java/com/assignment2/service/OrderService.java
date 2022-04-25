@@ -15,18 +15,39 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * The type Order service manages the orders of either customers or restaurants.
+ */
 @Service
 @Log4j2
 public class OrderService {
+    /**
+     * The Order repository.
+     */
     @Autowired
     OrderRepository orderRepository;
+    /**
+     * The Restaurant repository.
+     */
     @Autowired
     RestaurantRepository restaurantRepository;
+    /**
+     * The Customer repository.
+     */
     @Autowired
     CustomerRepository customerRepository;
+    /**
+     * The Email service.
+     */
     @Autowired
     EmailService emailService;
 
+    /**
+     * Gets restaurant orders.
+     *
+     * @param restaurantName the restaurant name
+     * @return the restaurant orders
+     */
     public List<OrderDTO> getRestaurantOrders(String restaurantName) {
         Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
         List<Order> orders = orderRepository.findByRestaurant(restaurant);
@@ -34,6 +55,12 @@ public class OrderService {
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
     }
 
+    /**
+     * Gets customer orders.
+     *
+     * @param username the username of the customer
+     * @return the customer orders
+     */
     public List<OrderDTO> getCustomerOrders(String username) {
         Customer customer = customerRepository.findByUsername(username).orElse(new Customer());
         List<Order> orders = orderRepository.findByCustomer(customer);
@@ -41,6 +68,13 @@ public class OrderService {
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
     }
 
+    /**
+     * Add order to a restaurant.
+     *
+     * @param orderDTO       the order dto
+     * @param username       the username
+     * @param restaurantName the restaurant name
+     */
     public void addOrder(OrderDTO orderDTO, String username, String restaurantName) {
         Customer customer = customerRepository.findByUsername(username).orElse(new Customer());
         Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
@@ -49,6 +83,12 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    /**
+     * Gets pending orders for a client.
+     *
+     * @param username the username of the client
+     * @return the pending orders
+     */
     public List<OrderDTO> getPendingOrders(String username) {
         Customer customer = customerRepository.findByUsername(username).orElse(new Customer());
         List<Order> orders = orderRepository.findByStatusNotLikeAndStatusNotLikeAndCustomer(OrderStatus.DELIVERED, OrderStatus.DECLINED, customer);
@@ -56,6 +96,11 @@ public class OrderService {
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
     }
 
+    /**
+     * Update order status.
+     *
+     * @param orderDTO the order dto
+     */
     public void updateOrderStatus(OrderDTO orderDTO) {
         Order currentOrder = orderRepository.getById(orderDTO.getOrderId());
         currentOrder.setStatus(orderDTO.getStatus());
@@ -63,6 +108,13 @@ public class OrderService {
         orderRepository.save(currentOrder);
     }
 
+    /**
+     * Sends a mail with the order details.
+     *
+     * @param orderDTO       the order dto
+     * @param username       the username
+     * @param restaurantName the restaurant name
+     */
     public void sendMail(OrderDTO orderDTO, String username, String restaurantName) {
         Customer customer = customerRepository.findByUsername(username).orElse(new Customer());
         Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());

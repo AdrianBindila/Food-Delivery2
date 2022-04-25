@@ -12,8 +12,19 @@ import java.io.FileOutputStream;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
+
+/**
+ * The type Pdf exporter.
+ */
 @Log4j2
 public class PDFExporter {
+    /**
+     * Export menu pdf.
+     *
+     * @param restaurantName the restaurant name
+     * @param adminName      the admin name
+     * @param menu           the menu
+     */
     public void exportMenuPDF(String restaurantName, String adminName, List<FoodDTO> menu) {
         Document document = new Document();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);

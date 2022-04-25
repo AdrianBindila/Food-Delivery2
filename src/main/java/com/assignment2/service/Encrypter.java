@@ -4,6 +4,10 @@ import lombok.extern.log4j.Log4j2;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+/**
+ * The type Encrypter encrypts the password of the user in the database.
+ */
 @Log4j2
 public class Encrypter implements Encryption {
 

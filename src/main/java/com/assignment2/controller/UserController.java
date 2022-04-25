@@ -1,7 +1,6 @@
 package com.assignment2.controller;
 
 import com.assignment2.dtos.UserDTO;
-import com.assignment2.model.User;
 import com.assignment2.service.Encrypter;
 import com.assignment2.service.UserService;
 import lombok.extern.log4j.Log4j2;
