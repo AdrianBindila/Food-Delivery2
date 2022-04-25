@@ -5,13 +5,14 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
-
+@Log4j2
 public class PDFExporter {
     public void exportMenuPDF(String restaurantName, String adminName, List<FoodDTO> menu) {
         Document document = new Document();
@@ -27,6 +28,7 @@ public class PDFExporter {
         }finally {
             document.close();
         }
+        log.info("Menu PDF "+restaurantName+".pdf written in reports directory.");
     }
 
     private PdfPTable makeTable(List<FoodDTO> menu) {

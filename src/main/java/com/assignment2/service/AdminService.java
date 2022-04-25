@@ -14,7 +14,7 @@ public class AdminService {
     AdminRepository adminRepository;
 
     public Admin findAdmin(String username, String password){
-        return adminRepository.findByUsernameAndPassword(username, password).orElse(new Admin());//TODO set an error for when not found
+        return adminRepository.findByUsernameAndPassword(username, password).orElse(new Admin());
     }
 
     public void addRestaurant(String adminUsername, RestaurantDTO restaurantDTO) {

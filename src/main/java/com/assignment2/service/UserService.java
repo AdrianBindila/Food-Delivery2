@@ -1,17 +1,19 @@
 package com.assignment2.service;
 
+import com.assignment2.dtos.UserDTO;
 import com.assignment2.dtos.mapper.AdminMapper;
 import com.assignment2.dtos.mapper.CustomerMapper;
-import com.assignment2.dtos.UserDTO;
 import com.assignment2.dtos.mapper.UserMapper;
 import com.assignment2.model.Admin;
 import com.assignment2.model.Customer;
 import com.assignment2.model.User;
 import com.assignment2.repository.UserRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Log4j2
 public class UserService {
     @Autowired
     UserRepository userRepository;
@@ -24,8 +26,10 @@ public class UserService {
             throw new RuntimeException(e);
         }
         if (user instanceof Admin admin) {
+            log.info("User is admin");
             return AdminMapper.getInstance().convertToDTO(admin);
         } else if (user instanceof Customer customer) {
+            log.info("User is customer");
             return CustomerMapper.getInstance().convertToDTO(customer);
         }
         return UserMapper.getInstance().convertToDTO(user);

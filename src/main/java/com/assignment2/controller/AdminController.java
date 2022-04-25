@@ -21,15 +21,13 @@ import java.util.List;
 public class AdminController {
     @Autowired
     AdminService adminService;
-    public AdminController(){
-        log.info("HELP");
-    }
+
     @GetMapping
     public ResponseEntity<Admin> getAdmin(@Param("username") String username, @Param("password") String password) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "AdminController");
         Admin admin = adminService.findAdmin(username, password);
-
+        log.info("Retrieved admin from DB.");
         return ResponseEntity.accepted().headers(headers).body(admin);
     }
 
@@ -37,8 +35,8 @@ public class AdminController {
     public ResponseEntity<RestaurantDTO> addRestaurant(@Param("username") String username, @RequestBody RestaurantDTO restaurantDTO) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "AdminController");
-
         adminService.addRestaurant(username, restaurantDTO);
+        log.info("Added new restaurant.");
         return ResponseEntity.accepted().headers(headers).body(restaurantDTO);
     }
 
@@ -46,6 +44,6 @@ public class AdminController {
     public void getMenuPdf(@Param("restaurantName") String restaurantName, @Param("username") String username, @RequestBody List<FoodDTO> Menu){
         PDFExporter pdfExporter=new PDFExporter();
         pdfExporter.exportMenuPDF(restaurantName, username, Menu);
-
+        log.info("Generated report PDF.");
     }
 }

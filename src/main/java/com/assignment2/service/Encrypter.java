@@ -1,9 +1,10 @@
 package com.assignment2.service;
 
-import java.nio.charset.StandardCharsets;
+import lombok.extern.log4j.Log4j2;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+@Log4j2
 public class Encrypter implements Encryption {
 
     @Override
@@ -22,6 +23,7 @@ public class Encrypter implements Encryption {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+        log.info("Generated encrypted password");
         return encryptedString;
     }
 

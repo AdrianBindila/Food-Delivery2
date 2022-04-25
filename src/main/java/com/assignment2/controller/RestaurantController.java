@@ -6,6 +6,7 @@ import com.assignment2.dtos.RestaurantDTO;
 import com.assignment2.service.FoodService;
 import com.assignment2.service.OrderService;
 import com.assignment2.service.RestaurantService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/restaurant")
+@Log4j2
 public class RestaurantController {
     @Autowired
     RestaurantService restaurantService;
@@ -29,6 +31,7 @@ public class RestaurantController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "RestaurantController");
         List<RestaurantDTO> restaurants = restaurantService.getRestaurants();
+        log.info("GET Restaurant list");
         return ResponseEntity.accepted().headers(headers).body(restaurants);
     }
 
@@ -37,12 +40,14 @@ public class RestaurantController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "RestaurantController");
         List<FoodDTO> menuDTO=foodService.getMenu(restaurantName);
+        log.info("GET food list");
         return ResponseEntity.accepted().headers(headers).body(menuDTO);
     }
 
     @PostMapping("/food")
     public void insertFood(@Param("restaurantName") String restaurantName, @RequestBody FoodDTO foodDTO){
         restaurantService.insertFood(foodDTO, restaurantName);
+        log.info("POST "+foodDTO.getName()+" for restaurant:"+restaurantName);
     }
 
     @GetMapping("/order")
@@ -50,6 +55,7 @@ public class RestaurantController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "RestaurantController");
         List<OrderDTO> orderDTOS=orderService.getRestaurantOrders(restaurantName);
+        log.info("GET orders for"+restaurantName);
         return ResponseEntity.accepted().headers(headers).body(orderDTOS);
     }
 }
