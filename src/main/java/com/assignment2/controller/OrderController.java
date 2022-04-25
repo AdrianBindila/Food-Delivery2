@@ -18,6 +18,7 @@ public class OrderController {
     @PostMapping
     public void addOrder(@Param("username") String username, @Param("restaurantName") String restaurantName, @RequestBody OrderDTO orderDTO) {
         orderService.addOrder(orderDTO, username, restaurantName);
+        orderService.sendMail(orderDTO, username, restaurantName);
     }
     @GetMapping("/restaurant")
     public ResponseEntity<List<OrderDTO>> getRestaurantOrders(@Param("restaurantName") String restaurantName){

@@ -22,6 +22,8 @@ public class OrderService {
     RestaurantRepository restaurantRepository;
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    EmailService emailService;
 
     public List<OrderDTO> getRestaurantOrders(String restaurantName) {
         Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
@@ -35,8 +37,8 @@ public class OrderService {
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
     }
 
-    public void addOrder(OrderDTO orderDTO, String customerUsername, String restaurantName) {
-        Customer customer = customerRepository.findByUsername(customerUsername).orElse(new Customer());
+    public void addOrder(OrderDTO orderDTO, String username, String restaurantName) {
+        Customer customer = customerRepository.findByUsername(username).orElse(new Customer());
         Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
         Order order = OrderMapper.getInstance().convertFromDTO(orderDTO, customer, restaurant);
         orderRepository.save(order);
@@ -49,8 +51,29 @@ public class OrderService {
     }
 
     public void updateOrderStatus(OrderDTO orderDTO) {
-        Order currentOrder=orderRepository.getById(orderDTO.getOrderId());
+        Order currentOrder = orderRepository.getById(orderDTO.getOrderId());
         currentOrder.setStatus(orderDTO.getStatus());
         orderRepository.save(currentOrder);
+    }
+
+    public void sendMail(OrderDTO orderDTO, String username, String restaurantName) {
+        Customer customer = customerRepository.findByUsername(username).orElse(new Customer());
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
+        Order order = OrderMapper.getInstance().convertFromDTO(orderDTO, customer, restaurant);
+        emailService.send(restaurant.getAdmin().getEmail(), customer.getFirstName(), printOrderForMail(order));
+    }
+
+    private String printOrderForMail(Order o) {
+        StringBuilder s = new StringBuilder();
+        s.append("Total: ");
+        s.append(o.getTotalPrice());
+        s.append("\n");
+        s.append("Address: ");
+        s.append(o.getDeliveryAddress());
+        s.append("\n");
+        List<String> itemList = o.getItems().stream().map(item -> item.getName() + ": " + item.getPrice() + "\n").toList();
+        s.append(itemList);
+        System.out.println(s);
+        return s.toString();
     }
 }

@@ -2,7 +2,7 @@
 - [x] export as PDF the menu of his restaurant
 
 ### The Customer can:
-- [ ] send email to administrator when placing a new order containing:
+- [x] send email to administrator when placing a new order containing:
 
 ### Security
 - [ ] each user should be able to view only the pages that they should have

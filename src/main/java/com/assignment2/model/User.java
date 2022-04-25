@@ -17,14 +17,14 @@ import javax.persistence.*;
 public class User{
     @Id
     @GeneratedValue
-    public Long id;
+    private Long id;
 
     @Column(nullable = false, unique = true)//TODO: remove this field from customer and its DTO
-    public String email;
+    private String email;
 
     @Column(nullable = false, unique = true)
-    public String username;
+    private String username;
 
     @Column(nullable = false)
-    public String password;
+    private String password;
 }

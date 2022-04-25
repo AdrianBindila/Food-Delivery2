@@ -27,6 +27,4 @@ public class RestaurantService {
         restaurant.getMenu().add(food);
         restaurantRepository.save(restaurant);
     }
-
-
 }

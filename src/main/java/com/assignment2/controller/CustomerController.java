@@ -24,7 +24,6 @@ public class CustomerController {
     @GetMapping
     public ResponseEntity<Customer> getCustomer(UserDTO loginDTO) {
         Customer customer = customerService.getCustomer(loginDTO);
-        System.out.println(customer);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Responded", "CustomerController");
         return ResponseEntity.accepted().headers(headers).body(customer);
