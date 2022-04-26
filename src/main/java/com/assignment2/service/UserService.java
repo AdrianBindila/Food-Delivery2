@@ -32,7 +32,7 @@ public class UserService {
      * @return the user
      */
     public UserDTO getUser(String username, String password) {
-        User user = null;
+        User user;
         try {
             user = userRepository.findByUsernameAndPassword(username, password).orElseThrow(Exception::new);
         } catch (Exception e) {
