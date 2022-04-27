@@ -14,5 +14,5 @@ access to
 - [ ] add Unit Tests (using Mockito) for the Services
 
 ### Documentation
-- [ ] Add Logs to your application
-- [ ] Add Java doc to methods/classes in your application
+- [x] Add Logs to your application
+- [x] Add Java doc to methods/classes in your application
