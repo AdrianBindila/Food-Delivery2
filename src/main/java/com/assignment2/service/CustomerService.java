@@ -31,7 +31,7 @@ public class CustomerService {
     public Customer getCustomer(UserDTO loginDTO){
         Encrypter encrypter=new Encrypter();
         log.info("Found user"+loginDTO.getUsername());
-        return customerRepository.findByUsernameAndPassword(loginDTO.getUsername(), encrypter.encrypt(loginDTO.getPassword())).orElse(new Customer());
+        return customerRepository.findByUsernameAndPassword(loginDTO.getUsername(), encrypter.encrypt(loginDTO.getPassword())).orElseThrow();
     }
 
     /**
