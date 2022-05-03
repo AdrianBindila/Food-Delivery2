@@ -44,7 +44,7 @@ public class OrderService {
      * @return the restaurant orders
      */
     public List<OrderDTO> getRestaurantOrders(String restaurantName) {
-        Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElseThrow();
         List<Order> orders = orderRepository.findByRestaurant(restaurant);
         log.info("Get "+restaurant.getName()+" orders from DB");
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
@@ -57,7 +57,7 @@ public class OrderService {
      * @return the customer orders
      */
     public List<OrderDTO> getCustomerOrders(String username) {
-        Customer customer = customerRepository.findByUsername(username).orElse(new Customer());
+        Customer customer = customerRepository.findByUsername(username).orElseThrow();
         List<Order> orders = orderRepository.findByCustomer(customer);
         log.info("Get "+customer.getFirstName()+customer.getLastName()+" orders from DB");
         return orders.stream().map(order -> OrderMapper.getInstance().convertToDTO(order)).toList();
@@ -71,8 +71,8 @@ public class OrderService {
      * @param restaurantName the restaurant name
      */
     public void addOrder(OrderDTO orderDTO, String username, String restaurantName) {
-        Customer customer = customerRepository.findByUsername(username).orElse(new Customer());
-        Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
+        Customer customer = customerRepository.findByUsername(username).orElseThrow();
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElseThrow();
         Order order = OrderMapper.getInstance().convertFromDTO(orderDTO, customer, restaurant);
         log.info("Insert order: "+order.getOrderId()+" in DB");
         orderRepository.save(order);
