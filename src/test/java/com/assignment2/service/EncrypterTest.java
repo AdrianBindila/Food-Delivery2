@@ -12,9 +12,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.junit.jupiter.api.Assertions.*;
 @RunWith(MockitoJUnitRunner.class)
 class EncrypterTest {
-
+    private final Encrypter encrypter=new Encrypter();
     @Test
     void encrypt() {
-
+        assertEquals("202CB962AC59075B964B07152D234B70",encrypter.encrypt("123"));
     }
 }
