@@ -12,6 +12,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 /**
  * The type User service retrieves the user from a database based on its credentials.
  */
@@ -33,12 +35,7 @@ public class UserService {
      */
     public UserDTO getUser(String username, String password) {
         User user;
-        try {
-            user = userRepository.findByUsernameAndPassword(username, password).orElseThrow(Exception::new);
-        } catch (Exception e) {
-            log.error("Could not find user.");
-            throw new RuntimeException(e);
-        }
+        user = userRepository.findByUsernameAndPassword(username, password).orElseThrow();
         if (user instanceof Admin admin) {
             log.info("User is admin");
             return AdminMapper.getInstance().convertToDTO(admin);
@@ -48,4 +45,5 @@ public class UserService {
         }
         return UserMapper.getInstance().convertToDTO(user);
     }
+
 }

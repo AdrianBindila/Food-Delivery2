@@ -29,7 +29,7 @@ public class AdminService {
      * @return the admin
      */
     public Admin findAdmin(String username, String password){
-        return adminRepository.findByUsernameAndPassword(username, password).orElse(new Admin());
+        return adminRepository.findByUsernameAndPassword(username, password).orElseThrow();
     }
 
     /**
@@ -40,7 +40,6 @@ public class AdminService {
      */
     public void addRestaurant(String adminUsername, RestaurantDTO restaurantDTO) {
         Restaurant restaurant=RestaurantMapper.getInstance().convertFromDTO(restaurantDTO);
-
         adminRepository.findByUsername(adminUsername).ifPresentOrElse(
                 admin -> {
                     admin.setRestaurant(restaurant);
