@@ -1,6 +1,7 @@
 package com.assignment2.controller;
 
 import com.assignment2.dtos.OrderDTO;
+import com.assignment2.service.EmailService;
 import com.assignment2.service.OrderService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ public class OrderController {
     @PostMapping
     public void addOrder(@Param("username") String username, @Param("restaurantName") String restaurantName, @RequestBody OrderDTO orderDTO) {
         orderService.addOrder(orderDTO, username, restaurantName);
-        orderService.sendMail(orderDTO, username, restaurantName);
+        EmailService emailService=new EmailService();
+        emailService.sendMail(orderDTO, username, restaurantName);
         log.info("POST order\n" + username + "\n" + restaurantName + "\n" + orderDTO.getOrderId());
     }
 

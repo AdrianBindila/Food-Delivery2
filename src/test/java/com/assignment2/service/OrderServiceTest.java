@@ -1,10 +1,18 @@
 package com.assignment2.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@RunWith(MockitoJUnitRunner.class)
 class OrderServiceTest {
+
+
+    @BeforeEach
+    void setUp() {
+    }
 
     @Test
     void getRestaurantOrders() {
@@ -24,9 +32,5 @@ class OrderServiceTest {
 
     @Test
     void updateOrderStatus() {
-    }
-
-    @Test
-    void sendMail() {
     }
 }

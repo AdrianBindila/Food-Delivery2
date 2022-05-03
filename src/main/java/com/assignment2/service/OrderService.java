@@ -36,11 +36,6 @@ public class OrderService {
      */
     @Autowired
     CustomerRepository customerRepository;
-    /**
-     * The Email service.
-     */
-    @Autowired
-    EmailService emailService;
 
     /**
      * Gets restaurant orders.
@@ -106,34 +101,5 @@ public class OrderService {
         currentOrder.setStatus(orderDTO.getStatus());
         log.info("Updated order "+currentOrder.getOrderId());
         orderRepository.save(currentOrder);
-    }
-
-    /**
-     * Sends a mail with the order details.
-     *
-     * @param orderDTO       the order dto
-     * @param username       the username
-     * @param restaurantName the restaurant name
-     */
-    public void sendMail(OrderDTO orderDTO, String username, String restaurantName) {
-        Customer customer = customerRepository.findByUsername(username).orElse(new Customer());
-        Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
-        Order order = OrderMapper.getInstance().convertFromDTO(orderDTO, customer, restaurant);
-        log.info("Sent email with order no."+order.getOrderId()+" to restaurant: "+restaurant.getName());
-        emailService.send(restaurant.getAdmin().getEmail(), customer.getFirstName(), printOrderForMail(order));
-    }
-
-    private String printOrderForMail(Order o) {
-        StringBuilder s = new StringBuilder();
-        s.append("Total: ");
-        s.append(o.getTotalPrice());
-        s.append("\n");
-        s.append("Address: ");
-        s.append(o.getDeliveryAddress());
-        s.append("\n");
-        List<String> itemList = o.getItems().stream().map(item -> item.getName() + ": " + item.getPrice() + "\n").toList();
-        s.append(itemList);
-        System.out.println(s);
-        return s.toString();
     }
 }
