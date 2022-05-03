@@ -9,20 +9,20 @@ import org.springframework.lang.NonNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterDTO {
-    @NonNull
+//    @NonNull
     private String firstName;
-    @NonNull
+//    @NonNull
     private String lastName;
-    @NonNull
+//    @NonNull
     private String email;
-    @NonNull
+//    @NonNull
     private String address;
-    @NonNull
+//    @NonNull
     private String phone;
     @NonNull
     private String username;
     @NonNull
     private String password;
-    @NonNull
+//    @NonNull
     private String confirmedPassword;
 }

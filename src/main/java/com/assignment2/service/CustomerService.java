@@ -5,6 +5,7 @@ import com.assignment2.dtos.UserDTO;
 import com.assignment2.dtos.mapper.RegisterMapper;
 import com.assignment2.model.Customer;
 import com.assignment2.repository.CustomerRepository;
+import com.assignment2.repository.RoleRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,8 @@ public class CustomerService {
      */
     @Autowired
     CustomerRepository customerRepository;
-
+    @Autowired
+    RoleRepository roleRepository;
     /**
      * Get customer from login credentials.
      *
@@ -41,8 +43,7 @@ public class CustomerService {
      */
     public void insertCustomer(RegisterDTO registerDTO){
         Customer customer=RegisterMapper.getInstance().convertFromDTO(registerDTO);
-        Encrypter encrypter=new Encrypter();
-        customer.setPassword(encrypter.encrypt(customer.getPassword()));
+        customer.setRole(roleRepository.findByName("USER").orElseThrow());
         customerRepository.save(customer);
         log.info("Add customer "+customer.getFirstName());
     }

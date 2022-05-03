@@ -8,18 +8,20 @@ import com.assignment2.model.Admin;
 import com.assignment2.model.Customer;
 import com.assignment2.model.User;
 import com.assignment2.repository.UserRepository;
+import com.assignment2.security.UserPrincipal;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.NoSuchElementException;
 
 /**
  * The type User service retrieves the user from a database based on its credentials.
  */
 @Service
 @Log4j2
-public class UserService {
+public class UserService implements UserDetailsService {
     /**
      * The User repository.
      */
@@ -46,4 +48,9 @@ public class UserService {
         return UserMapper.getInstance().convertToDTO(user);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username " + username + " not found"));
+        return new UserPrincipal(user);
+    }
 }
