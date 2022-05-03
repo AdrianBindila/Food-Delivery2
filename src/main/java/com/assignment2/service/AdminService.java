@@ -40,12 +40,8 @@ public class AdminService {
      */
     public void addRestaurant(String adminUsername, RestaurantDTO restaurantDTO) {
         Restaurant restaurant=RestaurantMapper.getInstance().convertFromDTO(restaurantDTO);
-        adminRepository.findByUsername(adminUsername).ifPresentOrElse(
-                admin -> {
-                    admin.setRestaurant(restaurant);
-                    adminRepository.save(admin);
-                },
-                () -> System.out.println("Admin not found!")
-        );
+        Admin admin=adminRepository.findByUsername(adminUsername).orElseThrow();
+        admin.setRestaurant(restaurant);
+        adminRepository.save(admin);
     }
 }

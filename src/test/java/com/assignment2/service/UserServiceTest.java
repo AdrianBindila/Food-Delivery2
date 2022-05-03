@@ -47,8 +47,6 @@ class UserServiceTest {
 
     @Test
     public void getUserNotFound() {
-        assertThrows(NoSuchElementException.class,()->{
-           userService.getUser("asada","aiadhihd");
-        });
+        assertThrows(NoSuchElementException.class,()-> userService.getUser("asada","aiadhihd"));
     }
 }
