@@ -36,7 +36,7 @@ public class FoodService {
      * @return the menu
      */
     public List<FoodDTO> getMenu(String restaurantName) {
-        Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElse(new Restaurant());
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElseThrow();
         List<Food> foodList = foodRepository.findByRestaurant(restaurant);
         log.info("Get menu for restaurant: " + restaurant.getName());
         return foodList.stream().map(food -> FoodMapper.getInstance().convertToDTO(food)).toList();

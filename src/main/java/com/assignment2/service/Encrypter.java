@@ -9,9 +9,14 @@ import java.security.NoSuchAlgorithmException;
  * The type Encrypter encrypts the password of the user in the database.
  */
 @Log4j2
-public class Encrypter implements Encryption {
+public class Encrypter{
 
-    @Override
+    /**
+     * Encrypt string.
+     *
+     * @param s the string
+     * @return the string
+     */
     public String encrypt(String s) {
         String encryptedString="";
         try {
@@ -31,8 +36,4 @@ public class Encrypter implements Encryption {
         return encryptedString;
     }
 
-    @Override
-    public boolean checkMatching(String providedPassword, String existingPassword) {
-        return false;
-    }
 }
