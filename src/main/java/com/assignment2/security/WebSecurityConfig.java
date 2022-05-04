@@ -30,21 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/api/customer","/api/login").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .defaultSuccessUrl("/", true)
-                .permitAll()
-                .and()
-                .httpBasic()
-                .and()
-                .csrf().disable()
-                .logout()
-                .logoutSuccessUrl("/");
+        http.formLogin((form)-> form.loginPage("/login").permitAll());
     }
 //    @Bean
 //    public DaoAuthenticationProvider authenticationProvider(){
