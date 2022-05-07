@@ -8,6 +8,8 @@ import com.assignment2.repository.CustomerRepository;
 import com.assignment2.repository.RoleRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,16 +26,16 @@ public class CustomerService {
     CustomerRepository customerRepository;
     @Autowired
     RoleRepository roleRepository;
+
     /**
      * Get customer from login credentials.
      *
      * @param loginDTO the login dto
      * @return the customer
      */
-    public Customer getCustomer(UserDTO loginDTO){
-        Encrypter encrypter=new Encrypter();
-        log.info("Found user"+loginDTO.getUsername());
-        return customerRepository.findByUsernameAndPassword(loginDTO.getUsername(), encrypter.encrypt(loginDTO.getPassword())).orElseThrow();
+    public Customer getCustomer(UserDTO loginDTO) {
+        log.info("Found user" + loginDTO.getUsername());
+        return customerRepository.findByUsername(loginDTO.getUsername()).orElseThrow();
     }
 
     /**
@@ -41,10 +43,12 @@ public class CustomerService {
      *
      * @param registerDTO the register dto
      */
-    public void insertCustomer(RegisterDTO registerDTO){
-        Customer customer=RegisterMapper.getInstance().convertFromDTO(registerDTO);
-        customer.setRole(roleRepository.findByName("USER").orElseThrow());
+    public void insertCustomer(RegisterDTO registerDTO) {
+        Customer customer = RegisterMapper.getInstance().convertFromDTO(registerDTO);
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+        customer.setRole(roleRepository.findByName("CUSTOMER").orElseThrow());
         customerRepository.save(customer);
-        log.info("Add customer "+customer.getFirstName());
+        log.info("Add customer " + customer.getFirstName());
     }
 }

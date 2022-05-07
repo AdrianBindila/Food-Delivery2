@@ -8,12 +8,8 @@ import com.assignment2.model.Admin;
 import com.assignment2.model.Customer;
 import com.assignment2.model.User;
 import com.assignment2.repository.UserRepository;
-import com.assignment2.security.UserPrincipal;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Log4j2
-public class UserService implements UserDetailsService {
+public class UserService {
     /**
      * The User repository.
      */
@@ -32,12 +28,12 @@ public class UserService implements UserDetailsService {
      * Gets user from the database.
      *
      * @param username the username
-     * @param password the password
+     *
      * @return the user
      */
-    public UserDTO getUser(String username, String password) {
+    public UserDTO getUser(String username) {
         User user;
-        user = userRepository.findByUsernameAndPassword(username, password).orElseThrow();
+        user = userRepository.findByUsername(username).orElseThrow();
         if (user instanceof Admin admin) {
             log.info("User is admin");
             return AdminMapper.getInstance().convertToDTO(admin);
@@ -46,11 +42,5 @@ public class UserService implements UserDetailsService {
             return CustomerMapper.getInstance().convertToDTO(customer);
         }
         return UserMapper.getInstance().convertToDTO(user);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username " + username + " not found"));
-        return new UserPrincipal(user);
     }
 }
