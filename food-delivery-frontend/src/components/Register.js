@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { sendRegistration } from "../api/registerAPI";
 import styles from "./styles.module.css";
 
-function Register() {
+function Register(props) {
   const [register, setRegister] = useState({
     firstName: "",
     lastName: "",
@@ -43,6 +43,7 @@ function Register() {
       password: "",
       confirmedPassword: "",
     });
+    props.
     navigate("/login");
     event.preventDefault();
   }

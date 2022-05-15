@@ -69,6 +69,7 @@ public class EmailService {
      * @param restaurantName the restaurant name
      */
     public void sendMail(OrderDTO orderDTO, String username, String restaurantName) {
+
         Customer customer = customerRepository.findByUsername(username).orElseThrow();
         Restaurant restaurant = restaurantRepository.findByName(restaurantName).orElseThrow();
         Order order = OrderMapper.getInstance().convertFromDTO(orderDTO, customer, restaurant);

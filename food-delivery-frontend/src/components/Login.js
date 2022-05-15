@@ -37,7 +37,7 @@ function Login() {
                 isAdmin
                     ? navigate("/admin")
                     : getRestaurantList().then(() => navigate("/customer"));
-            }) : document.getElementById('submit').blur();
+            }) : document.getElementById('submit').blur();            
         event.preventDefault();
     }
 

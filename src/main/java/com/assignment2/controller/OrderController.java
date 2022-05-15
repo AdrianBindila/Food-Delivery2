@@ -17,11 +17,12 @@ import java.util.List;
 public class OrderController {
     @Autowired
     OrderService orderService;
+    @Autowired
+    EmailService emailService;
 
     @PostMapping
     public void addOrder(@Param("username") String username, @Param("restaurantName") String restaurantName, @RequestBody OrderDTO orderDTO) {
         orderService.addOrder(orderDTO, username, restaurantName);
-        EmailService emailService=new EmailService();
         emailService.sendMail(orderDTO, username, restaurantName);
         log.info("POST order\n" + username + "\n" + restaurantName + "\n" + orderDTO.getOrderId());
     }

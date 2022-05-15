@@ -39,14 +39,14 @@ class UserServiceTest {
         User user = new User();
         user.setUsername("Hello");
         user.setPassword("World");
-        when(userService.userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword()))
+        when(userService.userRepository.findByUsername(user.getUsername()))
                 .thenReturn(Optional.of(user));
-        UserDTO newUser = userService.getUser(user.getUsername(), user.getPassword());
+        UserDTO newUser = userService.getUser(user.getUsername());
         assertEquals("Hello", newUser.getUsername());
     }
 
     @Test
     public void getUserNotFound() {
-        assertThrows(NoSuchElementException.class,()-> userService.getUser("asada","aiadhihd"));
+        assertThrows(NoSuchElementException.class,()-> userService.getUser("asada"));
     }
 }

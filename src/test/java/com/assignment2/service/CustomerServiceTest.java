@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -36,7 +37,7 @@ class CustomerServiceTest {
         sampleCustomer.setFirstName("John");
         sampleCustomer.setUsername("asdf");
         sampleCustomer.setPassword("123");
-        when(customerService.customerRepository.findByUsernameAndPassword(sampleCustomer.getUsername(), new Encrypter().encrypt(sampleCustomer.getPassword())))
+        when(customerService.customerRepository.findByUsername(sampleCustomer.getUsername()))
                 .thenReturn(Optional.of(sampleCustomer));
     }
 

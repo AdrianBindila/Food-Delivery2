@@ -47,7 +47,7 @@ public class CustomerService {
         Customer customer = RegisterMapper.getInstance().convertFromDTO(registerDTO);
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
-        customer.setRole(roleRepository.findByName("CUSTOMER").orElseThrow());
+//        customer.setRole(roleRepository.findByName("CUSTOMER").orElseThrow());
         customerRepository.save(customer);
         log.info("Add customer " + customer.getFirstName());
     }
